@@ -1,0 +1,3 @@
+[submodule "EasyCC-CPP"]
+	path = thirdparty/EasyCC-CPP
+	url = https://github.com/amirbawab/EasyCC-CPP
