@@ -9,13 +9,41 @@
 
 // ML defines
 #define YY_DECL extern "C" int yylex()
+
+// Exit codes
+const int CODE_LEXICAL_ERROR = 1;
+
+// Lexical error function
+void lexicalError(char* message);
 %}
 
 %%
-[ \t\r\n]                ;
-(0|[1-9][0-9]+)\.[0-9]+  { std::cout << "Found a floating-point number:" << yytext << std::endl; }
-0|([1-9][0-9]*)          { std::cout << "Found an integer:" << yytext << std::endl; }
-[a-zA-Z]+                { std::cout << "Found a string: " << yytext << std::endl; }
-"//".*                   { std::cout << "Found a comment: " << yytext << std::endl; }
-.                        { std::cout << "Invalid token: " << yytext << std::endl; }
+[ \t\r\n] {}
+
+(0|[1-9][0-9]+)\.[0-9]+  {
+    // FLOAT
+    std::cout << "Found a floating-point number:" << yytext << std::endl;
+}
+
+0|([1-9][0-9]*) {
+    // INTEGER
+    std::cout << "Found an integer:" << yytext << std::endl;
+}
+
+\"((\\[abfnrtv\"\\])|[ \ta-zA-Z0-9\~\@\#\$\%\^\&\*\-\+\/\`\<\>\=\_\|\'\.\,\;\:\!\?\{\}\[\]\(\)])*\"  {
+    // STRING
+    std::cout << "Found a string: " << yytext << std::endl;
+}
+
+"//".* {
+    // INLINE COMMENT
+    std::cout << "Found a comment: " << yytext << std::endl;
+}
+
+. {
+    // EVERYTHING ELSE
+    std::cerr << "Invalid token: " << yytext << std::endl;
+    exit(CODE_LEXICAL_ERROR);
+}
 %%
+
