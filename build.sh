@@ -1,8 +1,8 @@
 #/bin/bash
-#
-# Build the compiler
-#
-# You MUST replace the following commands with the commands for building your compiler
 
-make clean -C ./src
-make -C ./src
+BUILD_DIR="build/"
+
+rm -rf $BUILD_DIR
+mkdir -p $BUILD_DIR
+cd $BUILD_DIR
+cmake .. && make
