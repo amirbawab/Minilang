@@ -4,7 +4,6 @@ project(minilang)
 # Define options/variables
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
-set(CMAKE_CURRENT_BUILD_DIR ${PROJECT_SOURCE_DIR}/cmake-build-debug)
 
 # Prepare build directory
 file(MAKE_DIRECTORY

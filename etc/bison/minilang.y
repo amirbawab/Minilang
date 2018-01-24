@@ -26,23 +26,51 @@ void yyerror(const char *s);
 %}
 
 %union {
-	int ival;
-	float fval;
-	char *sval;
+	int     intVal;
+	float   floatVal;
+	char    *stringVal;
+	char    *identVal;
 }
 
 // Define tokens
-%token <ival> T_INT
-%token <fval> T_FLOAT
-%token <sval> T_STRING
-%token T_VAR T_FLOAT T_INT T_STRING T_WHILE T_IF T_PRINT T_READ T_BOOLEAN T_TRUE T_FALSE
+%token
+    T_VAR
+    T_TYPE_FLOAT
+    T_TYPE_INT
+    T_TYPE_STRING
+    T_WHILE
+    T_IF
+    T_PRINT
+    T_READ
+    T_BOOLEAN
+    T_TRUE
+    T_FALSE
+    T_COLUMN
+    T_EQUAL
+    <intVal>     T_INT
+    <floatVal>   T_FLOAT
+    <stringVal>  T_STRING
+    <identVal>   T_IDENTIFIER
+    ;
 
 // Set grammar start non-terminal
 %start S
 
 %%
-S :
-     { std::cout << "Statement" << std::endl; };
+S : |
+    STATEMENT;
+
+STATEMENT :
+    T_VAR T_IDENTIFIER T_COLUMN TYPE T_EQUAL EXPR { std::cout << "Statement" << std::endl; };
+
+EXPR:
+    ;
+
+TYPE:
+    T_TYPE_INT
+    | T_TYPE_FLOAT
+    | T_TYPE_STRING
+    ;
 %%
 
 /**
