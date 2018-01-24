@@ -18,9 +18,9 @@ elseif(NOT BISON_FOUND)
 endif()
 
 # Flex it!
-FLEX_TARGET(miniflex ${PROJECT_SOURCE_DIR}/etc/flex/minilang.l  ${CMAKE_CURRENT_BINARY_DIR}/minilang_flex.cpp)
+flex_target(miniflex ${PROJECT_SOURCE_DIR}/etc/flex/minilang.l  ${CMAKE_CURRENT_BINARY_DIR}/minilang_flex.cpp)
 
 # Build c++ files
-file(GLOB_RECURSE PROJECT_SOURCE_FILES src/*.cpp ${FLEX_miniflex_OUTPUTS})
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} fl)
+file(GLOB_RECURSE PROJECT_SOURCE_FILES src/*.cpp)
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_FILES} ${FLEX_miniflex_OUTPUTS})
+target_link_libraries(${PROJECT_NAME} ${FLEX_LIBRARIES})
