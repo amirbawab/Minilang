@@ -31,19 +31,18 @@ void yyerror(const char *s);
 	char *sval;
 }
 
-%token <ival> INT
-%token <fval> FLOAT
-%token <sval> STRING
+// Define tokens
+%token <ival> T_INT
+%token <fval> T_FLOAT
+%token <sval> T_STRING
+%token T_VAR T_FLOAT T_INT T_STRING T_WHILE T_IF T_PRINT T_READ T_BOOLEAN T_TRUE T_FALSE
+
+// Set grammar start non-terminal
+%start S
 
 %%
-snazzle:
-	INT snazzle      { std::cout << "bison found an int: " << $1 << std::endl; }
-	| FLOAT snazzle  { std::cout << "bison found a float: " << $1 << std::endl; }
-	| STRING snazzle { std::cout << "bison found a string: " << $1 << std::endl; }
-	| INT            { std::cout << "bison found an int: " << $1 << std::endl; }
-	| FLOAT          { std::cout << "bison found a float: " << $1 << std::endl; }
-	| STRING         { std::cout << "bison found a string: " << $1 << std::endl; }
-	;
+S :
+     { std::cout << "Statement" << std::endl; };
 %%
 
 /**
