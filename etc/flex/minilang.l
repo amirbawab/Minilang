@@ -24,10 +24,12 @@ const int CODE_SUCCESS = 0;
 %}
 
 %%
-[ \t\n]         ;
-[0-9]+\.[0-9]+  { std::cout << "Found a floating-point number:" << yytext << std::endl; }
-[0-9]+          { std::cout << "Found an integer:" << yytext << std::endl; }
-[a-zA-Z0-9]+    { std::cout << "Found a string: " << yytext << std::endl; }
+[ \t\r\n]                ;
+(0|[1-9][0-9]+)\.[0-9]+  { std::cout << "Found a floating-point number:" << yytext << std::endl; }
+0|([1-9][0-9]*)          { std::cout << "Found an integer:" << yytext << std::endl; }
+[a-zA-Z]+                { std::cout << "Found a string: " << yytext << std::endl; }
+"//".*                   { std::cout << "Found a comment: " << yytext << std::endl; }
+.                        { std::cout << "Invalid token: " << yytext << std::endl; }
 %%
 
 /**
