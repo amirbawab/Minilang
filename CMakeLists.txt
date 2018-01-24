@@ -18,9 +18,14 @@ elseif(NOT BISON_FOUND)
 endif()
 
 # Flex it!
-flex_target(miniflex ${PROJECT_SOURCE_DIR}/etc/flex/minilang.l  ${CMAKE_CURRENT_BINARY_DIR}/minilang_flex.cpp)
+flex_target(miniflex ${PROJECT_SOURCE_DIR}/etc/flex/minilang.l
+        ${CMAKE_CURRENT_BINARY_DIR}/minilang_flex.cpp)
+
+# Bison it!
+bison_target(minibison ${PROJECT_SOURCE_DIR}/etc/bison/minilang.y
+        ${CMAKE_CURRENT_BINARY_DIR}/minilang_bison.cpp
+        DEFINES_FILE ${PROJECT_SOURCE_DIR}/include/bison/minilang_bison.h)
 
 # Build c++ files
-file(GLOB_RECURSE PROJECT_SOURCE_FILES src/*.cpp)
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_FILES} ${FLEX_miniflex_OUTPUTS})
-target_link_libraries(${PROJECT_NAME} ${FLEX_LIBRARIES})
+add_executable(${PROJECT_NAME} ${BISON_minibison_OUTPUTS} ${FLEX_miniflex_OUTPUTS})
+target_link_libraries(${PROJECT_NAME} ${FLEX_LIBRARIES} )
