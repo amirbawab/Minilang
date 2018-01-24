@@ -133,8 +133,11 @@ int main(int argc, char** argv) {
 	}
 	yyin = inputFile;
 
-    // Run lexical analyzer
-	yylex();
+	// Create lexical tokens and validate them against the grammar
+    do {
+        // Run "lexical" and "syntax" analyzers
+        yyparse();
+    } while (!feof(yyin));
 
 	return CODE_SUCCESS;
 }
