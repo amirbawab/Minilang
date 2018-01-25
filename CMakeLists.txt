@@ -34,5 +34,8 @@ bison_target(minibison ${PROJECT_SOURCE_DIR}/etc/bison/minilang.y
         DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/cpp/include/bison/minilang_bison.h)
 
 # Build c++ files
-add_executable(${PROJECT_NAME} ${BISON_minibison_OUTPUTS} ${FLEX_miniflex_OUTPUTS})
+add_executable(${PROJECT_NAME}
+        src/minilang/minilang.cpp
+        ${BISON_minibison_OUTPUTS}
+        ${FLEX_miniflex_OUTPUTS})
 target_link_libraries(${PROJECT_NAME} ${FLEX_LIBRARIES} )
