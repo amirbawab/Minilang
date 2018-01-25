@@ -18,26 +18,56 @@ void lexicalError(char* message);
 %}
 
 %%
-[ \t\r\n] {}
+var     return T_VAR;
+float   return T_TYPE_FLOAT;
+int     return T_TYPE_INT;
+string  return T_TYPE_STRING;
+while   return T_WHILE;
+if      return T_IF;
+else    return T_ELSE;
+print   return T_PRINT;
+read    return T_READ;
+boolean return T_BOOLEAN;
+TRUE    return T_TRUE;
+FALSE   return T_FALSE;
+":"     return T_COLON;
+";"     return T_SEMICOLON;
+"="     return T_EQUAL;
+"=="    return T_IS_EQUAL;
+"!="    return T_IS_NOT_EQUAL;
+"&&"    return T_AND;
+"||"    return T_OR;
+"{"     return T_LCURL;
+"}"     return T_RCURL;
+"+"     return T_PLUS;
+"-"     return T_MINUS;
+"*"     return T_MULT;
+"/"     return T_DIV;
+"("     return T_LPAR;
+")"     return T_RPAR;
+
+[ \t\r\n] {
+    // White-space
+}
+
+[a-zA-Z_][a-zA-Z0-9_]* {
+    return T_IDENTIFIER;
+}
 
 (0|[1-9][0-9]+)\.[0-9]+  {
-    // FLOAT
-    std::cout << "Found a floating-point number:" << yytext << std::endl;
+    return T_FLOAT;
 }
 
 0|([1-9][0-9]*) {
-    // INTEGER
-    std::cout << "Found an integer:" << yytext << std::endl;
+    return T_INTEGER;
 }
 
 \"((\\[abfnrtv\"\\])|[ \ta-zA-Z0-9\~\@\#\$\%\^\&\*\-\+\/\`\<\>\=\_\|\'\.\,\;\:\!\?\{\}\[\]\(\)])*\"  {
-    // STRING
-    std::cout << "Found a string: " << yytext << std::endl;
+    return T_STRING;
 }
 
 "//".* {
-    // INLINE COMMENT
-    std::cout << "Found a comment: " << yytext << std::endl;
+    // Inline comment
 }
 
 . {
