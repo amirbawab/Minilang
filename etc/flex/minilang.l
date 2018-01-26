@@ -47,22 +47,22 @@ FALSE   {if(m_tokenFlag) std::cout << "T_FALSE" << std::endl; return T_FALSE;}
 }
 
 [a-zA-Z_][a-zA-Z0-9_]* {
-    if(m_tokenFlag) std::cout << "T_IDENTIFIER" << std::endl;
+    if(m_tokenFlag) std::cout << "T_IDENTIFIER(" << yytext << ")" << std::endl;
     return T_IDENTIFIER;
 }
 
 (0|[1-9][0-9]+)\.[0-9]+  {
-    if(m_tokenFlag) std::cout << "T_FLOAT" << std::endl;
+    if(m_tokenFlag) std::cout << "T_FLOAT(" << yytext << ")" << std::endl;
     return T_FLOAT;
 }
 
 0|([1-9][0-9]*) {
-    if(m_tokenFlag) std::cout << "T_INTEGER" << std::endl;
+    if(m_tokenFlag) std::cout << "T_INTEGER(" << yytext << ")" << std::endl;
     return T_INTEGER;
 }
 
 \"((\\[abfnrtv\"\\])|[ \ta-zA-Z0-9\~\@\#\$\%\^\&\*\-\+\/\`\<\>\=\_\|\'\.\,\;\:\!\?\{\}\[\]\(\)])*\"  {
-    if(m_tokenFlag) std::cout << "T_STRING" << std::endl;
+    if(m_tokenFlag) std::cout << "T_STRING(" << yytext << ")" << std::endl;
     return T_STRING;
 }
 
