@@ -14,7 +14,11 @@ extern "C" int yylex();
 // ML variables
 std::vector<std::string> m_inputFiles;
 std::string m_outputFile;
+
+// Program flags
 bool m_tokenFlag = false;
+bool m_scanFlag = false;
+bool m_parseFlag = false;
 
 /**
  * Syntax error function
@@ -31,6 +35,7 @@ void printUsage() {
     std::cout
             << "MiniLang - A mini language compiler using Flex/Bison" << std::endl
             << "Usage: minilang [OPTION]... [FILE]..." << std::endl
+            << "    -s, --scan            Scan input" << std::endl
             << "    -t, --token           Print tokens" << std::endl
             << "    -o, --output          Output file path. If not used print to STDOUT" << std::endl
             << "    -h, --help            Display this help message" << std::endl;
@@ -42,6 +47,8 @@ void printUsage() {
 void initParams(int argc, char *argv[]) {
     struct option longOptions[] = {
             {"token", no_argument, 0, 't'},
+            {"scan", no_argument, 0, 's'},
+            {"parse", no_argument, 0, 'p'},
             {"output", required_argument, 0, 'o'},
             {"help", no_argument, 0, 'h'},
             {0, 0, 0, 0}
@@ -49,13 +56,19 @@ void initParams(int argc, char *argv[]) {
 
     int optionIndex = 0;
     int c;
-    while ((c = getopt_long(argc, argv, "hto:", longOptions, &optionIndex)) != -1) {
+    while ((c = getopt_long(argc, argv, "hspto:", longOptions, &optionIndex)) != -1) {
         switch (c) {
             case 'o':
                 m_outputFile = optarg;
                 break;
             case 't':
                 m_tokenFlag = true;
+                break;
+            case 's':
+                m_scanFlag = true;
+                break;
+            case 'p':
+                m_parseFlag = true;
                 break;
             case 'h':
             default:
@@ -108,14 +121,10 @@ int main(int argc, char** argv) {
     }
     yyin = inputFile;
 
-    if(m_tokenFlag) {
+    if(m_tokenFlag || m_scanFlag) {
         while (yylex()) {}
-    } else {
-        // Create lexical tokens and validate them against the grammar
-        do {
-            // Run "lexical" and "syntax" analyzers
-            yyparse();
-        } while (!feof(yyin));
+    } else if(m_parseFlag) {
+        do { yyparse(); } while (!feof(yyin));
     }
 
     return CODE_SUCCESS;
