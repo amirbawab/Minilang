@@ -20,11 +20,31 @@ bool m_tokenFlag = false;
 bool m_scanFlag = false;
 bool m_parseFlag = false;
 
+// Keep track of errors
+bool syntaxErrorFlag = false;
+
 /**
  * Syntax error function
  */
 void yyerror(const char *s) {
+    std::cout << "Error: Syntax error" << std::endl;
+    syntaxErrorFlag = true;
+}
+
+/**
+ * Syntax error
+ * @param s
+ */
+void syError(const char *s) {
     std::cerr << "Error: " << s << std::endl;
+    syntaxErrorFlag = true;
+}
+
+/**
+ * Syntax error
+ */
+void syErrorEOF() {
+    syError("Unexpected end of file");
     exit(CODE_COMPILER_ERROR);
 }
 
@@ -125,6 +145,7 @@ int main(int argc, char** argv) {
         while (yylex()) {}
     } else if(m_parseFlag) {
         do { yyparse(); } while (!feof(yyin));
+        return !syntaxErrorFlag ? CODE_SUCCESS : CODE_COMPILER_ERROR;
     }
 
     return CODE_SUCCESS;
