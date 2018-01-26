@@ -25,7 +25,4 @@ then
 fi
 
 # Invoke the compiler with the provided arguments: mode ($1) and file ($2)
-#
-# You MUST replace the following command with the command for invoking your compiler
-
-./src/minic "$1" < "$2"
+./build/bin/minilang "--$1" "$2"
