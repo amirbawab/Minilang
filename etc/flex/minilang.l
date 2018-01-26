@@ -13,6 +13,8 @@
 extern "C" bool m_tokenFlag;
 %}
 
+%option yylineno
+
 %%
 var     {if(m_tokenFlag) std::cout << "T_VAR" << std::endl; return T_VAR;}
 float   {if(m_tokenFlag) std::cout << "T_TYPE_FLOAT" << std::endl; return T_TYPE_FLOAT;}
@@ -41,6 +43,7 @@ FALSE   {if(m_tokenFlag) std::cout << "T_FALSE" << std::endl; return T_FALSE;}
 "/"     {if(m_tokenFlag) std::cout << "T_DIV" << std::endl; return T_DIV;}
 "("     {if(m_tokenFlag) std::cout << "T_LPAR" << std::endl; return T_LPAR;}
 ")"     {if(m_tokenFlag) std::cout << "T_RPAR" << std::endl; return T_RPAR;}
+"!"     {if(m_tokenFlag) std::cout << "T_NOT" << std::endl; return T_NOT;}
 
 [ \t\r\n] {
     // White-space
@@ -51,7 +54,7 @@ FALSE   {if(m_tokenFlag) std::cout << "T_FALSE" << std::endl; return T_FALSE;}
     return T_IDENTIFIER;
 }
 
-(0|[1-9][0-9]+)\.[0-9]+  {
+(0|[1-9][0-9]*)\.[0-9]+ {
     if(m_tokenFlag) std::cout << "T_FLOAT(" << yytext << ")" << std::endl;
     return T_FLOAT;
 }
@@ -73,7 +76,6 @@ FALSE   {if(m_tokenFlag) std::cout << "T_FALSE" << std::endl; return T_FALSE;}
 . {
     // EVERYTHING ELSE
     std::cerr << "Invalid token: " << yytext << std::endl;
-    exit(CODE_COMPILER_ERROR);
 }
 %%
 
