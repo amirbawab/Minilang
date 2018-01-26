@@ -57,6 +57,7 @@ void printUsage() {
             << "Usage: minilang [OPTION]... [FILE]..." << std::endl
             << "    -s, --scan            Scan input" << std::endl
             << "    -t, --token           Print tokens" << std::endl
+            << "    -p, --parse           Parse tokens" << std::endl
             << "    -o, --output          Output file path. If not used print to STDOUT" << std::endl
             << "    -h, --help            Display this help message" << std::endl;
 }
