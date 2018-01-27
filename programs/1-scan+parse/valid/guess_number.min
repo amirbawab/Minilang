@@ -1,0 +1,17 @@
+// Guess number
+
+// Number to guess
+var num : int = 20;
+
+// Read input from user
+var guess : int = 0;
+read guess;
+
+// Keep guessing until match
+while num != guess {
+    print "Wrong guess";
+    read guess;
+}
+
+print "Number guessed";
+print guess;

@@ -1,0 +1,2 @@
+// Wrong variable declaration 1
+var a : other = TRUE;

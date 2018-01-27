@@ -1,0 +1,5 @@
+// Test variable declaration
+var a : int = 1;
+var b : float = 0.1;
+var c : boolean = FALSE;
+var d : string = "String";

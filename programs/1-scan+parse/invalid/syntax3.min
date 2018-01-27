@@ -1,0 +1,3 @@
+// Variable declaration after statement
+read a;
+var a : int = 1;

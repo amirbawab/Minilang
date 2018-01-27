@@ -1,0 +1,30 @@
+// Find average of numbers from 1 to N
+
+// Declare N
+var N : int = 0;
+
+// Keep track of sum
+var sum : int = 0;
+
+// Keep track of current number
+var current : int = N;
+
+// Declare average average
+var average : float = 0.0;
+
+// Read N from the user
+read N;
+
+// Iterate
+while current != 0 {
+    sum = sum + current;
+    current = current - 1;
+}
+
+// Compute average
+average = sum / N;
+
+print "Average from 1 to ";
+print N;
+print " is: ";
+print average;

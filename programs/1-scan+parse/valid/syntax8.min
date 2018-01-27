@@ -1,0 +1,11 @@
+// Test uniary operation
+a = -1;
+b = --1;
+c = ---1;
+d = ----1;
+e = !TRUE;
+f = !!TRUE;
+g = !!!TRUE;
+h = !!!!TRUE;
+i = -1 + 1;
+j = !FALSE && TRUE;

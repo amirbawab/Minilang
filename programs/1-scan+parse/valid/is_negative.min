@@ -1,0 +1,30 @@
+// Check if a number is negative
+
+var num : int = 0;
+var pow : int = 0;
+var numTmp : int = 0;
+var powTmp : int = 0;
+var negative : boolean = TRUE;
+
+read num;
+
+pow = num * num;
+numTmp = num;
+while numTmp != 0 {
+    powTmp = powTmp + num;
+    numTmp = numTmp - 1;
+}
+
+if pow == powTmp {
+    print "Number is positive";
+    negative = FALSE;
+} else {
+    print "Number is negative";
+    negative = TRUE;
+}
+
+print "Absolute value is: ";
+if negative {
+    num = num * -1;
+}
+print num;

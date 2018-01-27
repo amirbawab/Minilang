@@ -1,0 +1,50 @@
+// Approximate e (Euler's number) up to N iterations
+
+// Declare iteration
+var iter : int = 0;
+
+// Declare e
+var e : float = 0.0;
+
+// Temp variables
+var fact : int = 0;
+var iterTmp : int = 0;
+
+// Read iteration from user
+var message : string = "Enter a value greater than 5";
+print message;
+read iter;
+
+// Check if number is negative
+while (iter == 0 
+    || iter == 1 
+    || iter == 2
+    || iter == 3
+    || iter == 4
+    || iter == 5) {
+
+    print message;
+    read iter;
+}
+
+while iter != -1 {
+
+    // Compute factorial
+    fact = 1;
+
+    // Optimize code
+    if iter != 0 && iter != 1 {
+        iterTmp = iter;
+        while iterTmp != 0 {
+            fact = fact * iterTmp;
+            iterTmp = iterTmp - 1;
+        }
+    }
+
+    // Update e
+    e = e + 1/fact;
+    iter = iter - 1;
+}
+
+print "Value computed of e is: ";
+print e;

@@ -1,0 +1,2 @@
+// Wrong usage of read
+read ""; // expression instead of identifier

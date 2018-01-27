@@ -1,0 +1,2 @@
+// Wrong variable declaration 3
+var a : int;

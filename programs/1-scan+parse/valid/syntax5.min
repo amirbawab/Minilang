@@ -1,0 +1,21 @@
+// Test if statement
+if 1 {}
+if 1 {} else {}
+
+if 1 {
+    if 2 {
+        if 3 {
+            while 4 {
+                if 5 {
+                    print "test";
+                    read a;
+                }
+            }
+        } else {}
+    } else {
+        print "";
+        if 1 {
+            print "";
+        }
+    }
+}
