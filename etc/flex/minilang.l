@@ -64,7 +64,7 @@ FALSE   {if(m_tokenFlag) std::cout << "T_FALSE" << std::endl; return T_FALSE;}
     return T_INTEGER;
 }
 
-\"((\\[abfnrtv\"\\])|[ \ta-zA-Z0-9\~\@\#\$\%\^\&\*\-\+\/\`\<\>\=\_\|\'\.\,\;\:\!\?\{\}\[\]\(\)])*\"  {
+\"((\\[abfnrtv\"\\])|[ a-zA-Z0-9\~\@\#\$\%\^\&\*\-\+\/\`\<\>\=\_\|\'\.\,\;\:\!\?\{\}\[\]\(\)])*\"  {
     if(m_tokenFlag) std::cout << "T_STRING(" << yytext << ")" << std::endl;
     return T_STRING;
 }
