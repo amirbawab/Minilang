@@ -24,5 +24,12 @@ then
 
 fi
 
-# Invoke the compiler with the provided arguments: mode ($1) and file ($2)
+# Run program
 ./build/bin/minilang "--$1" "$2"
+
+# Scan option
+if [[ "$1" == "scan" || "$1" == "parse" ]]; then
+    if [ "$?" -eq 0 ]; then
+        echo "OK"
+    fi
+fi

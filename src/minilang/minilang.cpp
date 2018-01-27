@@ -35,7 +35,7 @@ void printUsage() {
             << "MiniLang - A mini language compiler using Flex/Bison" << std::endl
             << "Usage: minilang [OPTION]... [FILE]..." << std::endl
             << "    -s, --scan            Scan input. Exit (1) on error" << std::endl
-            << "    -t, --token           Print tokens" << std::endl
+            << "    -t, --tokens          Print tokens" << std::endl
             << "    -p, --parse           Parse tokens" << std::endl
             << "    -h, --help            Display this help message" << std::endl;
 }
@@ -45,7 +45,7 @@ void printUsage() {
  */
 void initParams(int argc, char *argv[]) {
     struct option longOptions[] = {
-            {"token", no_argument, 0, 't'},
+            {"tokens", no_argument, 0, 't'},
             {"scan", no_argument, 0, 's'},
             {"parse", no_argument, 0, 'p'},
             {"help", no_argument, 0, 'h'},

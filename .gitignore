@@ -2,3 +2,4 @@
 *.swp
 cmake-build-debug/
 build/
+*.log
