@@ -2,7 +2,6 @@
 #include <cstdio>
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <vector>
 #include <getopt.h>
 
@@ -10,41 +9,21 @@
 extern "C" FILE *yyin;
 extern "C" int yyparse();
 extern "C" int yylex();
+extern "C" int yylineno;
 
 // ML variables
 std::vector<std::string> m_inputFiles;
-std::string m_outputFile;
 
 // Program flags
 bool m_tokenFlag = false;
 bool m_scanFlag = false;
 bool m_parseFlag = false;
 
-// Keep track of errors
-bool syntaxErrorFlag = false;
-
 /**
  * Syntax error function
  */
 void yyerror(const char *s) {
-    std::cout << "Error: Syntax error" << std::endl;
-    syntaxErrorFlag = true;
-}
-
-/**
- * Syntax error
- * @param s
- */
-void syError(const char *s) {
-    std::cerr << "Error: " << s << std::endl;
-    syntaxErrorFlag = true;
-}
-
-/**
- * Syntax error
- */
-void syErrorEOF() {
-    syError("Unexpected end of file");
+    std::cout << "Error: " << s << " at line " << yylineno << std::endl;
     exit(CODE_COMPILER_ERROR);
 }
 
@@ -55,10 +34,9 @@ void printUsage() {
     std::cout
             << "MiniLang - A mini language compiler using Flex/Bison" << std::endl
             << "Usage: minilang [OPTION]... [FILE]..." << std::endl
-            << "    -s, --scan            Scan input" << std::endl
+            << "    -s, --scan            Scan input. Exit (1) on error" << std::endl
             << "    -t, --token           Print tokens" << std::endl
             << "    -p, --parse           Parse tokens" << std::endl
-            << "    -o, --output          Output file path. If not used print to STDOUT" << std::endl
             << "    -h, --help            Display this help message" << std::endl;
 }
 
@@ -70,18 +48,14 @@ void initParams(int argc, char *argv[]) {
             {"token", no_argument, 0, 't'},
             {"scan", no_argument, 0, 's'},
             {"parse", no_argument, 0, 'p'},
-            {"output", required_argument, 0, 'o'},
             {"help", no_argument, 0, 'h'},
             {0, 0, 0, 0}
     };
 
     int optionIndex = 0;
     int c;
-    while ((c = getopt_long(argc, argv, "hspto:", longOptions, &optionIndex)) != -1) {
+    while ((c = getopt_long(argc, argv, "hspt", longOptions, &optionIndex)) != -1) {
         switch (c) {
-            case 'o':
-                m_outputFile = optarg;
-                break;
             case 't':
                 m_tokenFlag = true;
                 break;
@@ -104,7 +78,7 @@ void initParams(int argc, char *argv[]) {
  * @return true if all required arguments are set
  */
 bool validArguments() {
-    return !m_inputFiles.empty();
+    return !m_inputFiles.empty() && (m_scanFlag || m_parseFlag || m_tokenFlag);
 }
 
 /**
@@ -146,7 +120,6 @@ int main(int argc, char** argv) {
         while (yylex()) {}
     } else if(m_parseFlag) {
         do { yyparse(); } while (!feof(yyin));
-        return !syntaxErrorFlag ? CODE_SUCCESS : CODE_COMPILER_ERROR;
     }
 
     return CODE_SUCCESS;

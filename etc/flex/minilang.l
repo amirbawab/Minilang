@@ -75,7 +75,8 @@ FALSE   {if(m_tokenFlag) std::cout << "T_FALSE" << std::endl; return T_FALSE;}
 
 . {
     // EVERYTHING ELSE
-    std::cerr << "Invalid token: " << yytext << std::endl;
+    std::cerr << "Error: Invalid token " << yytext << " at line " << yylineno << std::endl;
+    exit(CODE_COMPILER_ERROR);
 }
 %%
 

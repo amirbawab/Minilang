@@ -9,14 +9,3 @@
  * @param s
  */
 void yyerror(const char *s);
-
-/**
- * Custom error message function
- * @param s
- */
-void syError(const char *s);
-
-/**
- * Custom EOF error message function
- */
-void syErrorEOF();
