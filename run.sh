@@ -26,10 +26,12 @@ fi
 
 # Run program
 ./build/bin/minilang "--$1" "$2"
+EXIT_CODE="$?"
 
 # Scan option
 if [[ "$1" == "scan" || "$1" == "parse" ]]; then
-    if [ "$?" -eq 0 ]; then
+    if [ "$EXIT_CODE" -eq 0 ]; then
         echo "OK"
     fi
 fi
+exit $EXIT_CODE

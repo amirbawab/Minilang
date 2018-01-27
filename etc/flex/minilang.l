@@ -20,12 +20,12 @@ var     {if(m_tokenFlag) std::cout << "T_VAR" << std::endl; return T_VAR;}
 float   {if(m_tokenFlag) std::cout << "T_TYPE_FLOAT" << std::endl; return T_TYPE_FLOAT;}
 int     {if(m_tokenFlag) std::cout << "T_TYPE_INT" << std::endl; return T_TYPE_INT;}
 string  {if(m_tokenFlag) std::cout << "T_TYPE_STRING" << std::endl; return T_TYPE_STRING;}
+boolean {if(m_tokenFlag) std::cout << "T_BOOLEAN" << std::endl; return T_TYPE_BOOLEAN;}
 while   {if(m_tokenFlag) std::cout << "T_WHILE" << std::endl; return T_WHILE;}
 if      {if(m_tokenFlag) std::cout << "T_IF" << std::endl; return T_IF;}
 else    {if(m_tokenFlag) std::cout << "T_ELSE" << std::endl; return T_ELSE;}
 print   {if(m_tokenFlag) std::cout << "T_PRINT" << std::endl; return T_PRINT;}
 read    {if(m_tokenFlag) std::cout << "T_READ" << std::endl; return T_READ;}
-boolean {if(m_tokenFlag) std::cout << "T_BOOLEAN" << std::endl; return T_BOOLEAN;}
 TRUE    {if(m_tokenFlag) std::cout << "T_TRUE" << std::endl; return T_TRUE;}
 FALSE   {if(m_tokenFlag) std::cout << "T_FALSE" << std::endl; return T_FALSE;}
 ":"     {if(m_tokenFlag) std::cout << "T_COLON" << std::endl; return T_COLON;}

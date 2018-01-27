@@ -21,13 +21,13 @@ extern "C" int yylineno;
     T_TYPE_FLOAT    "float type"
     T_TYPE_INT      "int type"
     T_TYPE_STRING   "string type"
+    T_TYPE_BOOLEAN  "boolean type"
     T_VAR           "var"
     T_WHILE         "while"
     T_IF            "if"
     T_ELSE          "else"
     T_PRINT         "print"
     T_READ          "read"
-    T_BOOLEAN       "boolean"
     T_TRUE          "TRUE"
     T_FALSE         "FALSE"
     T_EQUAL         "="
@@ -121,5 +121,6 @@ TYPE
     : T_TYPE_INT
     | T_TYPE_FLOAT
     | T_TYPE_STRING
+    | T_TYPE_BOOLEAN
     ;
 %%
