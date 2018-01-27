@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <getopt.h>
+#include <cstdlib>
 
 // Information for Flex
 extern "C" FILE *yyin;
