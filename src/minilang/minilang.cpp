@@ -24,7 +24,7 @@ bool m_parseFlag = false;
  * Syntax error function
  */
 void yyerror(const char *s) {
-    std::cout << "Error: " << s << " at line " << yylineno << std::endl;
+    std::cerr << "Error: " << s << " at line " << yylineno << std::endl;
     exit(CODE_COMPILER_ERROR);
 }
 
