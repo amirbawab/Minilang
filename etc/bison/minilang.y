@@ -1,3 +1,7 @@
+//%code requires {
+//#include <string>
+//}
+
 %{
 // ML Include
 #include <minilang/minilang.h>
@@ -10,10 +14,10 @@ extern "C" int yylineno;
 %}
 
 %union {
-	int     intVal;
-	float   floatVal;
-	char    *stringVal;
-	char    *identVal;
+	int      intVal;
+	float    floatVal;
+	char*    stringVal;
+	char*    identVal;
 }
 
 // Define tokens
@@ -67,7 +71,7 @@ extern "C" int yylineno;
 
 %%
 S
-    : VAR_DECS STATEMENTS
+    : VAR_DECS STATEMENTS 
     ;
 
 VAR_DECS
@@ -98,7 +102,7 @@ ELSE_OPT
     ;
 
 EXPR
-    : EXPR T_PLUS EXPR
+    : EXPR T_PLUS EXPR 
     | EXPR T_MINUS EXPR
     | EXPR T_MULT EXPR
     | EXPR T_DIV EXPR
@@ -109,7 +113,7 @@ EXPR
     | T_LPAR EXPR T_RPAR
     | T_MINUS EXPR %prec P_NEG
     | T_NOT EXPR %prec P_NOT
-    | T_INTEGER
+    | T_INTEGER { std::cout << $1 << std::endl;}
     | T_FLOAT
     | T_STRING
     | T_IDENTIFIER
