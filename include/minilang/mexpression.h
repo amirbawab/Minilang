@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include <minilang/mkind.h>
+#include <minilang/mtype.h>
 
 namespace mini {
 
@@ -16,20 +16,20 @@ namespace mini {
         // Right operand
         std::shared_ptr<MExpression> m_right;
 
-        // Type of the expression
-        mini::MExpression::TYPE m_type = mini::MExpression::UNDEFINED;
-
         // Kind of the expression
-        mini::KIND m_kind = mini::KIND::UNDEFINED;
+        mini::MExpression::TYPE m_kind = mini::MExpression::KIND::UNDEFINED;
+
+        // Operator value
+        std::string m_operator;
 
     public:
         MExpression(){};
 
         /**
-         * Specify the type of the expression
+         * Specify the kind of the expression
          * A binary operation
          */
-        enum TYPE {
+        enum KIND {
             UNDEFINED,
             B_PLUS,
             B_MINUS,
@@ -39,9 +39,21 @@ namespace mini {
             B_OR,
             B_IS_EQUAL,
             B_IS_NOT_EQUAL,
+            U_INTEGER,
+            U_FLOAT,
+            U_BOOLEAN,
+            U_STRING,
+            U_IDENTIFIER,
             U_MINUS,
             U_NOT
         };
+
+        /**
+         * Check if expression is composed of only one element
+         * e.g. string, integer, float and indetifier
+         * @return true if expression is atomic
+         */
+        bool isAtomic() const;
 
         /**
          * Check if expression is unary
@@ -50,9 +62,14 @@ namespace mini {
         bool isUnary() const;
 
         /**
-         * Check if an expression is undefined
-         * @return true if undefined
+         * Set the kind of the expression
+         * @param kind
          */
-        bool isUndefined() const;
+        void setKind(mini::MExpression::KIND kind) { m_kind = kind; }
+
+        /**
+         * Evaluate the type of the expression
+         */
+        mini::TYPE evalType();
     };
 }

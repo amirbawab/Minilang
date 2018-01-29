@@ -1,7 +1,7 @@
 #pragma once
 
 namespace mini {
-    enum KIND {
+    enum TYPE {
         UNDEFINED,
         INTEGER,
         FLOAT,
