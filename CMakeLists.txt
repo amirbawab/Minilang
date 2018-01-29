@@ -33,9 +33,12 @@ bison_target(minibison ${PROJECT_SOURCE_DIR}/etc/bison/minilang.y
         ${CMAKE_CURRENT_BINARY_DIR}/cpp/src/bison/minilang_bison.cpp
         DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/cpp/include/bison/minilang_bison.h)
 
+# Find all cpp files
+file(GLOB_RECURSE PROJECT_SOURCE_FILES src/*/*.cpp)
+
 # Build c++ files
 add_executable(${PROJECT_NAME}
-        src/minilang/minilang.cpp
+        ${PROJECT_SOURCE_FILES}
         ${BISON_minibison_OUTPUTS}
         ${FLEX_miniflex_OUTPUTS})
 target_link_libraries(${PROJECT_NAME} ${FLEX_LIBRARIES} )

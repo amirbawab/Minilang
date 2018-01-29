@@ -9,22 +9,7 @@ namespace mini {
      * Expression representing a binary or a unary operation
      */
     class MExpression {
-    private:
-        // Left operand
-        std::shared_ptr<MExpression> m_left;
-
-        // Right operand
-        std::shared_ptr<MExpression> m_right;
-
-        // Kind of the expression
-        mini::MExpression::TYPE m_kind = mini::MExpression::KIND::UNDEFINED;
-
-        // Operator value
-        std::string m_operator;
-
     public:
-        MExpression(){};
-
         /**
          * Specify the kind of the expression
          * A binary operation
@@ -47,6 +32,22 @@ namespace mini {
             U_MINUS,
             U_NOT
         };
+
+    private:
+        // Left operand
+        std::shared_ptr<MExpression> m_left;
+
+        // Right operand
+        std::shared_ptr<MExpression> m_right;
+
+        // Kind of the expression
+        KIND m_kind = mini::MExpression::KIND::UNDEFINED;
+
+        // Operator value
+        std::string m_operator;
+
+    public:
+        MExpression(){};
 
         /**
          * Check if expression is composed of only one element
