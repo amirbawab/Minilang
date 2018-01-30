@@ -1,7 +1,3 @@
-//%code requires {
-//#include <string>
-//}
-
 %{
 // ML Include
 #include <minilang/minilang.h>
@@ -12,6 +8,11 @@ extern "C" int yylex();
 extern "C" int yyparse();
 extern "C" int yylineno;
 %}
+
+%code requires {
+#include <memory>
+#include <minilang/mexpression.h>
+}
 
 %union {
 	int      intVal;
@@ -55,6 +56,9 @@ extern "C" int yylineno;
     <stringVal>  T_STRING       "string"
     <identVal>   T_IDENTIFIER   "identifier"
     ;
+
+// Non-terminal type
+%type <MExpression*> EXPR
 
 // Configure bison
 %locations
@@ -101,19 +105,19 @@ ELSE_OPT
     | %empty
     ;
 
-EXPR
-    : EXPR T_PLUS EXPR 
-    | EXPR T_MINUS EXPR
-    | EXPR T_MULT EXPR
-    | EXPR T_DIV EXPR
-    | EXPR T_IS_EQUAL EXPR
-    | EXPR T_IS_NOT_EQUAL EXPR
-    | EXPR T_AND EXPR
-    | EXPR T_OR EXPR
-    | T_LPAR EXPR T_RPAR
-    | T_MINUS EXPR %prec P_NEG
-    | T_NOT EXPR %prec P_NOT
-    | T_INTEGER { std::cout << $1 << std::endl;}
+EXPR[root]
+    : EXPR[left] T_PLUS EXPR[right]
+    | EXPR[left] T_MINUS EXPR[right]
+    | EXPR[left] T_MULT EXPR[right]
+    | EXPR[left] T_DIV EXPR[right]
+    | EXPR[left] T_IS_EQUAL EXPR[right]
+    | EXPR[left] T_IS_NOT_EQUAL EXPR[right]
+    | EXPR[left] T_AND EXPR[right]
+    | EXPR[left] T_OR EXPR[right]
+    | T_LPAR EXPR[left] T_RPAR
+    | T_MINUS EXPR[left] %prec P_NEG
+    | T_NOT EXPR[left] %prec P_NOT
+    | T_INTEGER
     | T_FLOAT
     | T_STRING
     | T_IDENTIFIER
