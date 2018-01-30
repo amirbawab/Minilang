@@ -3,33 +3,45 @@
 #include <minilang/mexpression.h>
 
 namespace mini {
-    template <class T>
-    class MValue : public MExpression {
-    private:
+    template<class T> class MValue{};
 
-        // Value of the expression
-        T m_value;
-
-        // Kind of the expression
-        MExpression::KIND m_kind = MExpression::UNDEFINED;
-
+    template <>
+    class MValue<int> : public MExpression {
     public:
-        /**
-         * Construct an atomic expression
-         * @param value
-         * @param kind
-         */
-        MValue(T value, MExpression::KIND kind) : m_value(value), m_kind(kind){}
-
-        /**
-         * Get value of the epxression
-         * @return
-         */
-        T getValue() const { return m_value; }
-
-        /**
-         * @see mini::MExpression::evalType
-         */
-        TYPE evalType();
+        int m_value;
+        MValue(int value) : m_value(value){}
+        mini::TYPE evalType() { return INTEGER; }
     };
+
+    template <>
+    class MValue<bool> : public MExpression {
+    public:
+        int m_value;
+        MValue(bool value) : m_value(value){}
+        mini::TYPE evalType() { return BOOLEAN; }
+    };
+
+    template <>
+    class MValue<char*> : public MExpression {
+    public:
+        char* m_value;
+        MValue(char* value) : m_value(value){}
+        mini::TYPE evalType() { return STRING; }
+    };
+
+    template <>
+    class MValue<float> : public MExpression {
+    public:
+        float m_value;
+        MValue(float value) : m_value(value){}
+        mini::TYPE evalType() { return FLOAT; }
+    };
+
+//    FIXME Identifier: get type from identifier
+//    template <>
+//    class MValue<int> : public MExpression {
+//    public:
+//        int m_value;
+//        mini::TYPE evalType() { return INTEGER; }
+//    };
 }

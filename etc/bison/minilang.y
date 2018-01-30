@@ -12,13 +12,13 @@ extern "C" int yylineno;
 %code requires {
 #include <memory>
 #include <minilang/mexpression.h>
+#include <minilang/mvalue.h>
 }
 
 %union {
-	int      intVal;
-	float    floatVal;
-	char*    stringVal;
-	char*    identVal;
+	mini::MValue<int>*      intVal;
+	mini::MValue<float>*    floatVal;
+	mini::MValue<char*>*    stringVal;
 }
 
 // Define tokens
