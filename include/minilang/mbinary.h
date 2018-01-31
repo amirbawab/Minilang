@@ -19,12 +19,6 @@ namespace mini {
     public:
 
         /**
-         * Set the kind of the expression
-         * @param kind
-         */
-        void setKind(KIND kind) { m_kind = kind; }
-
-        /**
          * @see mini::MExpression::evalType
          */
         virtual mini::TYPE evalType();

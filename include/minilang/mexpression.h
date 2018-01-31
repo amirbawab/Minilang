@@ -11,6 +11,7 @@ namespace mini {
          */
         enum KIND {
             UNDEFINED,
+            VALUE,
             B_PLUS,
             B_MINUS,
             B_TIMES,
@@ -33,9 +34,14 @@ namespace mini {
          */
         virtual mini::TYPE evalType()=0;
 
+        /**
+         * Set the kind of the expression
+         * @param kind
+         */
+        void setKind(KIND kind) { m_kind = kind; }
+
         protected:
             // Kind of the expression
-            // TODO Check if this variable is needed in all expression subclasses
             KIND m_kind = KIND::UNDEFINED;
     };
 }

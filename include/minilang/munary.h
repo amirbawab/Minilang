@@ -18,5 +18,11 @@ namespace mini {
          * @see mini::MExpression::evalType
          */
         virtual mini::TYPE evalType();
+
+        /**
+         * Set operand for the unary expression
+         * @param operand
+         */
+        void setOperand(mini::MExpression* operand) {m_operand = operand;}
     };
 }

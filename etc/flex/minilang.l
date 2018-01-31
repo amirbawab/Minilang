@@ -46,13 +46,13 @@ read    {if(m_tokenFlag) std::cout << "T_READ" << std::endl; return T_READ;}
 
 TRUE {
     if(m_tokenFlag) std::cout << "T_TRUE" << std::endl;
-    yylval.m_boolVal = new mini::MValue<bool>(true);
+    yylval.m_expression = new mini::MValue<bool>(true);
     return T_TRUE;
 }
 
 FALSE {
     if(m_tokenFlag) std::cout << "T_FALSE" << std::endl;
-    yylval.m_boolVal = new mini::MValue<bool>(false);
+    yylval.m_expression = new mini::MValue<bool>(false);
     return T_FALSE;
 }
 
@@ -67,19 +67,19 @@ FALSE {
 
 (0|[1-9][0-9]*)\.[0-9]+ {
     if(m_tokenFlag) std::cout << "T_FLOAT(" << yytext << ")" << std::endl;
-    yylval.m_floatVal = new mini::MValue<float>(atof(yytext));
+    yylval.m_expression = new mini::MValue<float>(atof(yytext));
     return T_FLOAT;
 }
 
 0|([1-9][0-9]*) {
     if(m_tokenFlag) std::cout << "T_INTEGER(" << yytext << ")" << std::endl;
-    yylval.m_intVal = new mini::MValue<int>(atoi(yytext));
+    yylval.m_expression = new mini::MValue<int>(atoi(yytext));
     return T_INTEGER;
 }
 
 \"((\\[abfnrtv\"\\])|[ a-zA-Z0-9\~\@\#\$\%\^\&\*\-\+\/\`\<\>\=\_\|\'\.\,\;\:\!\?\{\}\[\]\(\)])*\"  {
     if(m_tokenFlag) std::cout << "T_STRING(" << yytext << ")" << std::endl;
-    yylval.m_stringVal = new mini::MValue<char*>(yytext);
+    yylval.m_expression = new mini::MValue<char*>(yytext);
     return T_STRING;
 }
 

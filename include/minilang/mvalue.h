@@ -9,7 +9,7 @@ namespace mini {
     class MValue<int> : public MExpression {
     public:
         int m_value;
-        MValue(int value) : m_value(value){}
+        MValue(int value) : m_value(value){ m_kind = mini::MExpression::KIND::VALUE; }
         mini::TYPE evalType() { return INTEGER; }
     };
 

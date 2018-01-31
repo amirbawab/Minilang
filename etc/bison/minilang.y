@@ -16,10 +16,6 @@ extern "C" int yylineno;
 }
 
 %union {
-	mini::MValue<int>*      m_intVal;
-	mini::MValue<float>*    m_floatVal;
-	mini::MValue<char*>*    m_stringVal;
-	mini::MValue<bool>*     m_boolVal;
 	mini::MExpression*      m_expression;
 }
 
@@ -35,8 +31,6 @@ extern "C" int yylineno;
     T_ELSE          "else"
     T_PRINT         "print"
     T_READ          "read"
-    T_TRUE          "TRUE"
-    T_FALSE         "FALSE"
     T_EQUAL         "="
     T_COLON         ":"
     T_SEMICOLON     ";"
@@ -53,10 +47,12 @@ extern "C" int yylineno;
     T_AND           "&&"
     T_OR            "||"
     T_NOT           "!"
-    <m_intVal>     T_INTEGER      "integer number"
-    <m_floatVal>   T_FLOAT        "float number"
-    <m_stringVal>  T_STRING       "string"
-    <m_identVal>   T_IDENTIFIER   "identifier"
+    <m_expression>  T_INTEGER      "integer number"
+    <m_expression>  T_FLOAT        "float number"
+    <m_expression>  T_STRING       "string"
+    <m_expression>  T_IDENTIFIER   "identifier"
+    <m_expression>  T_TRUE         "TRUE"
+    <m_expression>  T_FALSE        "FALSE"
     ;
 
 // Non-terminal type
@@ -109,32 +105,38 @@ ELSE_OPT
 
 EXPR[root]
     : EXPR[left] T_PLUS EXPR[right] {
-        $root = mini::MExpressionFactory::createPlus($left, $right);
+        $root = mini::MExpressionFactory::createBPlus($left, $right);
     }
     | EXPR[left] T_MINUS EXPR[right] {
-        $root = mini::MExpressionFactory::createMinus($left, $right);
+        $root = mini::MExpressionFactory::createBMinus($left, $right);
     }
     | EXPR[left] T_MULT EXPR[right] {
-        $root = mini::MExpressionFactory::createTimes($left, $right);
+        $root = mini::MExpressionFactory::createBTimes($left, $right);
     }
     | EXPR[left] T_DIV EXPR[right] {
-        $root = mini::MExpressionFactory::createDivide($left, $right);
+        $root = mini::MExpressionFactory::createBDivide($left, $right);
     }
     | EXPR[left] T_IS_EQUAL EXPR[right] {
-        $root = mini::MExpressionFactory::createIsEqual($left, $right);
+        $root = mini::MExpressionFactory::createBIsEqual($left, $right);
     }
     | EXPR[left] T_IS_NOT_EQUAL EXPR[right] {
-        $root = mini::MExpressionFactory::createIsNotEqual($left, $right);
+        $root = mini::MExpressionFactory::createBIsNotEqual($left, $right);
     }
     | EXPR[left] T_AND EXPR[right] {
-        $root = mini::MExpressionFactory::createAND($left, $right);
+        $root = mini::MExpressionFactory::createBAND($left, $right);
     }
     | EXPR[left] T_OR EXPR[right] {
-        $root = mini::MExpressionFactory::createOR($left, $right);
+        $root = mini::MExpressionFactory::createBOR($left, $right);
     }
-    | T_LPAR EXPR[left] T_RPAR
-    | T_MINUS EXPR[left] %prec P_NEG
-    | T_NOT EXPR[left] %prec P_NOT
+    | T_MINUS EXPR[operand] %prec P_NEG {
+        $root = mini::MExpressionFactory::createUMinus($operand);
+    }
+    | T_NOT EXPR[operand] %prec P_NOT {
+        $root = mini::MExpressionFactory::createUNot($operand);
+    }
+    | T_LPAR EXPR[operand] T_RPAR {
+        $root = $operand;
+    }
     | T_INTEGER
     | T_FLOAT
     | T_STRING
