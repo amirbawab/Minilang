@@ -1,3 +1,4 @@
+#pragma once
 #include <minilang/mbinary.h>
 #include <minilang/munary.h>
 
