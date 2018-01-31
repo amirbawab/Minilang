@@ -109,7 +109,10 @@ ELSE_OPT
 
 EXPR[root]
     : EXPR[left] T_PLUS EXPR[right] {
-        $root->
+        mini::MBinary* binary = new mini::MBinary();
+        binary->setLeft($left);
+        binary->setRight($right);
+        $root = binary;
     }
     | EXPR[left] T_MINUS EXPR[right]
     | EXPR[left] T_MULT EXPR[right]

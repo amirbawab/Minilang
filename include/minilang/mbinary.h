@@ -5,13 +5,13 @@
 #include <minilang/mexpression.h>
 
 namespace mini {
-    class MBinary : MExpression {
+    class MBinary : public MExpression {
     private:
         // Left operand
-        std::shared_ptr<MExpression> m_left;
+        MExpression* m_left;
 
         // Right operand
-        std::shared_ptr<MExpression> m_right;
+        MExpression* m_right;
 
         // operator value
         std::string m_operator;
@@ -33,24 +33,24 @@ namespace mini {
          * Set left expression
          * @param left
          */
-        void setLeft(std::shared_ptr<MExpression> left) {m_left = left;}
+        void setLeft(MExpression* left) {m_left = left;}
 
         /**
          * Set right expression
          * @param right
          */
-        void setRight(std::shared_ptr<MExpression> right) {m_right = right;}
+        void setRight(MExpression* right) {m_right = right;}
 
         /**
          * Get left expression
          * @return left expression
          */
-        std::shared_ptr<mini::MExpression> getLeft() const {return m_left;}
+        mini::MExpression* getLeft() const {return m_left;}
 
         /**
          * Get right expression
          * @return right expression
          */
-        std::shared_ptr<mini::MExpression> getRight() const {return m_right;}
+        mini::MExpression* getRight() const {return m_right;}
     };
 }

@@ -8,7 +8,7 @@ namespace mini {
     private:
 
         // The only operand
-        std::shared_ptr<mini::MExpression> m_operand;
+        mini::MExpression* m_operand;
 
         // operator value
         std::string m_operator;

@@ -15,7 +15,7 @@ namespace mini {
         std::string m_name;
 
         // Variable expression
-        std::shared_ptr<mini::MExpression> m_expression;
+        mini::MExpression* m_expression;
 
     public:
 
@@ -29,6 +29,6 @@ namespace mini {
          * Get variable expression
          * @return expression
          */
-        std::shared_ptr<mini::MExpression> getExpression() { return m_expression; }
+        mini::MExpression* getExpression() { return m_expression; }
     };
 }
