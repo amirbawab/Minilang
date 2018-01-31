@@ -109,8 +109,7 @@ ELSE_OPT
 
 EXPR[root]
     : EXPR[left] T_PLUS EXPR[right] {
-        mini::MValue<int>* a = static_cast<mini::MValue<int>*>($left);
-        std::cout << a->m_value << std::endl;
+        $root->
     }
     | EXPR[left] T_MINUS EXPR[right]
     | EXPR[left] T_MULT EXPR[right]

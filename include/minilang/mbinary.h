@@ -28,5 +28,29 @@ namespace mini {
          * @see mini::MExpression::evalType
          */
         virtual mini::TYPE evalType();
+
+        /**
+         * Set left expression
+         * @param left
+         */
+        void setLeft(std::shared_ptr<MExpression> left) {m_left = left;}
+
+        /**
+         * Set right expression
+         * @param right
+         */
+        void setRight(std::shared_ptr<MExpression> right) {m_right = right;}
+
+        /**
+         * Get left expression
+         * @return left expression
+         */
+        std::shared_ptr<mini::MExpression> getLeft() const {return m_left;}
+
+        /**
+         * Get right expression
+         * @return right expression
+         */
+        std::shared_ptr<mini::MExpression> getRight() const {return m_right;}
     };
 }
