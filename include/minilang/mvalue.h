@@ -1,6 +1,7 @@
 #pragma once
 
 #include <minilang/mexpression.h>
+#include <minilang/midentifier.h>
 
 namespace mini {
     template<class T> class MValue{};
@@ -10,7 +11,7 @@ namespace mini {
     public:
         int m_value;
         MValue(int value) : m_value(value){ m_kind = mini::MExpression::KIND::VALUE; }
-        mini::TYPE evalType();
+        virtual mini::TYPE evalType();
         virtual std::string prettify();
     };
 
@@ -19,7 +20,7 @@ namespace mini {
     public:
         bool m_value;
         MValue(bool value) : m_value(value){m_kind = mini::MExpression::KIND::VALUE;}
-        mini::TYPE evalType();
+        virtual mini::TYPE evalType();
         virtual std::string prettify();
     };
 
@@ -28,7 +29,7 @@ namespace mini {
     public:
         char* m_value;
         MValue(char* value) : m_value(value){m_kind = mini::MExpression::KIND::VALUE;}
-        mini::TYPE evalType();
+        virtual mini::TYPE evalType();
         virtual std::string prettify();
     };
 
@@ -37,15 +38,16 @@ namespace mini {
     public:
         float m_value;
         MValue(float value) : m_value(value){m_kind = mini::MExpression::KIND::VALUE;}
-        mini::TYPE evalType();
+        virtual mini::TYPE evalType();
         virtual std::string prettify();
     };
 
-//    FIXME Identifier: get type from identifier
-//    template <>
-//    class MValue<int> : public MExpression {
-//    public:
-//        int m_value;
-//        mini::TYPE evalType() { return INTEGER; }
-//    };
+    template <>
+    class MValue<mini::MIdentifier*> : public MExpression {
+    public:
+        mini::MIdentifier* m_value;
+        MValue(mini::MIdentifier* value) : m_value(value) {m_kind = mini::MExpression::KIND::VALUE;}
+        virtual mini::TYPE evalType();
+        virtual std::string prettify();
+    };
 }

@@ -44,3 +44,14 @@ mini::TYPE mini::MValue<bool>::evalType() {
 std::string mini::MValue<bool>::prettify() {
     return m_value ? "TRUE" : "FALSE";
 }
+
+/*************
+ * IDENTIFIER
+ *************/
+
+mini::TYPE mini::MValue<mini::MIdentifier*>::evalType() {
+    return m_value->getVariable()->getType();
+}
+std::string mini::MValue<mini::MIdentifier*>::prettify() {
+    return m_value->prettify();
+}

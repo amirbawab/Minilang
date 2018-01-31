@@ -3,12 +3,13 @@
 #include <minilang/mvariable.h>
 
 namespace mini {
-    class MIdentifer : public mini::MExpression {
+    class MIdentifier : public mini::MExpression {
     private:
 
         // Original variable this identifier refers to
         mini::MVariable* m_variable = nullptr;
     public:
+        MIdentifier(MVariable* variable) : m_variable(variable){}
 
         /**
          * Get original vairable
@@ -17,7 +18,7 @@ namespace mini {
         mini::MVariable* getVariable() const {return m_variable;}
 
         /**
-         * @see mini::MExpression::evalTYpe
+         * @see mini::MExpression::evalType
          */
         virtual mini::TYPE evalType();
 

@@ -1,6 +1,7 @@
 #include <minilang/mbinary.h>
 #include <minilang/mreport.h>
 #include <sstream>
+#include <iostream>
 
 mini::TYPE mini::MBinary::evalType() {
     if(m_kind == KIND::UNDEFINED) {
