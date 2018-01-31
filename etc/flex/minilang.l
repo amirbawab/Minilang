@@ -27,8 +27,6 @@ if      {if(m_tokenFlag) std::cout << "T_IF" << std::endl; return T_IF;}
 else    {if(m_tokenFlag) std::cout << "T_ELSE" << std::endl; return T_ELSE;}
 print   {if(m_tokenFlag) std::cout << "T_PRINT" << std::endl; return T_PRINT;}
 read    {if(m_tokenFlag) std::cout << "T_READ" << std::endl; return T_READ;}
-TRUE    {if(m_tokenFlag) std::cout << "T_TRUE" << std::endl; return T_TRUE;}
-FALSE   {if(m_tokenFlag) std::cout << "T_FALSE" << std::endl; return T_FALSE;}
 ":"     {if(m_tokenFlag) std::cout << "T_COLON" << std::endl; return T_COLON;}
 ";"     {if(m_tokenFlag) std::cout << "T_SEMICOLON" << std::endl; return T_SEMICOLON;}
 "="     {if(m_tokenFlag) std::cout << "T_EQUAL" << std::endl; return T_EQUAL;}
@@ -46,6 +44,18 @@ FALSE   {if(m_tokenFlag) std::cout << "T_FALSE" << std::endl; return T_FALSE;}
 ")"     {if(m_tokenFlag) std::cout << "T_RPAR" << std::endl; return T_RPAR;}
 "!"     {if(m_tokenFlag) std::cout << "T_NOT" << std::endl; return T_NOT;}
 
+TRUE {
+    if(m_tokenFlag) std::cout << "T_TRUE" << std::endl;
+    yylval.m_boolVal = new mini::MValue<bool>(true);
+    return T_TRUE;
+}
+
+FALSE {
+    if(m_tokenFlag) std::cout << "T_FALSE" << std::endl;
+    yylval.m_boolVal = new mini::MValue<bool>(false);
+    return T_FALSE;
+}
+
 [ \t\r\n] {
     // White-space
 }
@@ -57,19 +67,19 @@ FALSE   {if(m_tokenFlag) std::cout << "T_FALSE" << std::endl; return T_FALSE;}
 
 (0|[1-9][0-9]*)\.[0-9]+ {
     if(m_tokenFlag) std::cout << "T_FLOAT(" << yytext << ")" << std::endl;
-    yylval.floatVal = new mini::MValue<float>(atof(yytext));
+    yylval.m_floatVal = new mini::MValue<float>(atof(yytext));
     return T_FLOAT;
 }
 
 0|([1-9][0-9]*) {
     if(m_tokenFlag) std::cout << "T_INTEGER(" << yytext << ")" << std::endl;
-    yylval.intVal = new mini::MValue<int>(atoi(yytext));
+    yylval.m_intVal = new mini::MValue<int>(atoi(yytext));
     return T_INTEGER;
 }
 
 \"((\\[abfnrtv\"\\])|[ a-zA-Z0-9\~\@\#\$\%\^\&\*\-\+\/\`\<\>\=\_\|\'\.\,\;\:\!\?\{\}\[\]\(\)])*\"  {
     if(m_tokenFlag) std::cout << "T_STRING(" << yytext << ")" << std::endl;
-    yylval.stringVal = new mini::MValue<char*>(yytext);
+    yylval.m_stringVal = new mini::MValue<char*>(yytext);
     return T_STRING;
 }
 

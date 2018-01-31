@@ -16,7 +16,7 @@ namespace mini {
     template <>
     class MValue<bool> : public MExpression {
     public:
-        int m_value;
+        bool m_value;
         MValue(bool value) : m_value(value){}
         mini::TYPE evalType() { return BOOLEAN; }
     };

@@ -11,14 +11,16 @@ extern "C" int yylineno;
 
 %code requires {
 #include <memory>
-#include <minilang/mexpression.h>
 #include <minilang/mvalue.h>
+#include <minilang/mbinary.h>
 }
 
 %union {
-	mini::MValue<int>*      intVal;
-	mini::MValue<float>*    floatVal;
-	mini::MValue<char*>*    stringVal;
+	mini::MValue<int>*      m_intVal;
+	mini::MValue<float>*    m_floatVal;
+	mini::MValue<char*>*    m_stringVal;
+	mini::MValue<bool>*     m_boolVal;
+	mini::MExpression*      m_expression;
 }
 
 // Define tokens
@@ -51,14 +53,14 @@ extern "C" int yylineno;
     T_AND           "&&"
     T_OR            "||"
     T_NOT           "!"
-    <intVal>     T_INTEGER      "integer number"
-    <floatVal>   T_FLOAT        "float number"
-    <stringVal>  T_STRING       "string"
-    <identVal>   T_IDENTIFIER   "identifier"
+    <m_intVal>     T_INTEGER      "integer number"
+    <m_floatVal>   T_FLOAT        "float number"
+    <m_stringVal>  T_STRING       "string"
+    <m_identVal>   T_IDENTIFIER   "identifier"
     ;
 
 // Non-terminal type
-%type <MExpression*> EXPR
+%type <m_expression> EXPR
 
 // Configure bison
 %locations
@@ -106,7 +108,10 @@ ELSE_OPT
     ;
 
 EXPR[root]
-    : EXPR[left] T_PLUS EXPR[right]
+    : EXPR[left] T_PLUS EXPR[right] {
+        mini::MValue<int>* a = static_cast<mini::MValue<int>*>($left);
+        std::cout << a->m_value << std::endl;
+    }
     | EXPR[left] T_MINUS EXPR[right]
     | EXPR[left] T_MULT EXPR[right]
     | EXPR[left] T_DIV EXPR[right]
