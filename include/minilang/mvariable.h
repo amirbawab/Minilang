@@ -30,5 +30,11 @@ namespace mini {
          * @return expression
          */
         mini::MExpression* getExpression() { return m_expression; }
+
+        /**
+         * Get varibale name
+         * @return string name
+         */
+        std::string getName() const {return m_name;}
     };
 }
