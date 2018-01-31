@@ -12,7 +12,7 @@ extern "C" int yylineno;
 %code requires {
 #include <memory>
 #include <minilang/mvalue.h>
-#include <minilang/mbinary.h>
+#include <minilang/mexpression_factory.h>
 }
 
 %union {
@@ -109,12 +109,8 @@ ELSE_OPT
 
 EXPR[root]
     : EXPR[left] T_PLUS EXPR[right] {
-        mini::MBinary* binary = new mini::MBinary();
-        binary->setKind(mini::MExpression::KIND::B_PLUS);
-        binary->setLeft($left);
-        binary->setRight($right);
-        binary->evalType();
-        $root = binary;
+        $root = mini::MExpressionFactory::createPlus($left, $right);
+        $root->evalType();
     }
     | EXPR[left] T_MINUS EXPR[right]
     | EXPR[left] T_MULT EXPR[right]
