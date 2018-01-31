@@ -1,6 +1,7 @@
 #pragma once
 
 #include <minilang/mtype.h>
+#include <string>
 
 namespace mini {
     class MExpression {
@@ -34,6 +35,7 @@ namespace mini {
 
         protected:
             // Kind of the expression
+            // TODO Check if this variable is needed in all expression subclasses
             KIND m_kind = KIND::UNDEFINED;
     };
 }
