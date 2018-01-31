@@ -40,6 +40,12 @@ namespace mini {
          */
         void setKind(KIND kind) { m_kind = kind; }
 
+        /**
+         * Prettify expression
+         * @return prettified expression string
+         */
+        virtual std::string prettify()=0;
+
         protected:
             // Kind of the expression
             KIND m_kind = KIND::UNDEFINED;

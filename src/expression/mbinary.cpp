@@ -1,5 +1,6 @@
 #include <minilang/mbinary.h>
 #include <minilang/mreport.h>
+#include <sstream>
 
 mini::TYPE mini::MBinary::evalType() {
     if(m_kind == KIND::UNDEFINED) {
@@ -62,4 +63,39 @@ mini::TYPE mini::MBinary::evalType() {
         default:
             throw std::runtime_error("Unrecognized type while evaluating the type of the expression");
     }
+}
+
+std::string mini::MBinary::prettify() {
+    std::stringstream ss;
+    std::string opt;
+    switch (m_kind) {
+        case B_MINUS:
+            opt = " - ";
+            break;
+        case B_PLUS:
+            opt = " + ";
+            break;
+        case B_TIMES:
+            opt = " * ";
+            break;
+        case B_DIVIDE:
+            opt = " / ";
+            break;
+        case B_IS_EQUAL:
+            opt = " == ";
+            break;
+        case B_IS_NOT_EQUAL:
+            opt = " != ";
+            break;
+        case B_AND:
+            opt =" && ";
+            break;
+        case B_OR:
+            opt = " || ";
+            break;
+        default:
+            throw std::runtime_error("Cannot prettify binary expression because kind is unknown");
+    }
+    ss << "( " << m_left->prettify() << opt << m_right->prettify() << " )";
+    return ss.str();
 }

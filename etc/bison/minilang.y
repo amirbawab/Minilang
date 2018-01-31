@@ -82,7 +82,9 @@ VAR_DECS
     ;
 
 VAR_DEC
-    : T_VAR T_IDENTIFIER T_COLON TYPE T_EQUAL EXPR T_SEMICOLON
+    : T_VAR T_IDENTIFIER T_COLON TYPE T_EQUAL EXPR[expr] T_SEMICOLON {
+        std::cout << "expression = " << $expr->prettify() << std::endl;
+    }
     ;
 
 STATEMENTS

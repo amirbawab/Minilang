@@ -24,5 +24,12 @@ namespace mini {
          * @param operand
          */
         void setOperand(mini::MExpression* operand) {m_operand = operand;}
+
+
+        /**
+         * @see mini::MExpression::prettify
+         * @return
+         */
+        virtual std::string prettify();
     };
 }

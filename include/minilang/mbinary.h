@@ -46,5 +46,10 @@ namespace mini {
          * @return right expression
          */
         mini::MExpression* getRight() const {return m_right;}
+
+        /**
+         * @see mini::MExpression::prettify
+         */
+        virtual std::string prettify();
     };
 }

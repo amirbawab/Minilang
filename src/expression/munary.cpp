@@ -1,5 +1,6 @@
 #include <minilang/munary.h>
 #include <minilang/mreport.h>
+#include <sstream>
 
 mini::TYPE mini::MUnary::evalType() {
     if(m_kind == KIND::UNDEFINED) {
@@ -20,4 +21,21 @@ mini::TYPE mini::MUnary::evalType() {
             }
             return mini::TYPE::BOOLEAN;
     }
+}
+
+std::string mini::MUnary::prettify() {
+    std::stringstream ss;
+    std::string opt;
+    switch (m_kind) {
+        case U_MINUS:
+            opt = " - ";
+            break;
+        case U_NOT:
+            opt = " ! ";
+            break;
+        default:
+            throw std::runtime_error("Cannot prettify unary expression because kind is unknown");
+    }
+    ss << "( " << opt << m_operand->prettify() << " )";
+    return ss.str();
 }
