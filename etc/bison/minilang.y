@@ -120,10 +120,18 @@ EXPR[root]
     | EXPR[left] T_DIV EXPR[right] {
         $root = mini::MExpressionFactory::createDivide($left, $right);
     }
-    | EXPR[left] T_IS_EQUAL EXPR[right]
-    | EXPR[left] T_IS_NOT_EQUAL EXPR[right]
-    | EXPR[left] T_AND EXPR[right]
-    | EXPR[left] T_OR EXPR[right]
+    | EXPR[left] T_IS_EQUAL EXPR[right] {
+        $root = mini::MExpressionFactory::createIsEqual($left, $right);
+    }
+    | EXPR[left] T_IS_NOT_EQUAL EXPR[right] {
+        $root = mini::MExpressionFactory::createIsNotEqual($left, $right);
+    }
+    | EXPR[left] T_AND EXPR[right] {
+        $root = mini::MExpressionFactory::createAND($left, $right);
+    }
+    | EXPR[left] T_OR EXPR[right] {
+        $root = mini::MExpressionFactory::createOR($left, $right);
+    }
     | T_LPAR EXPR[left] T_RPAR
     | T_MINUS EXPR[left] %prec P_NEG
     | T_NOT EXPR[left] %prec P_NOT

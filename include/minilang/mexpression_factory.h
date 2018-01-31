@@ -27,12 +27,41 @@ namespace mini {
          */
         static mini::MBinary* createTimes(mini::MExpression* left, mini::MExpression* right);
         /**
-         * Create a divice binary expression
+         * Create a divide binary expression
          * @param left
          * @param right
          * @return pointer to an expression
          */
         static mini::MBinary* createDivide(mini::MExpression* left, mini::MExpression* right);
+
+        /**
+         * Create an is equal binary expression
+         * @param left
+         * @param right
+         * @return pointer to an expression
+         */
+        static mini::MBinary* createIsEqual(mini::MExpression* left, mini::MExpression* right);
+        /**
+         * Create an is not equal binary expression
+         * @param left
+         * @param right
+         * @return pointer to an expression
+         */
+        static mini::MBinary* createIsNotEqual(mini::MExpression* left, mini::MExpression* right);
+        /**
+         * Create an AND binary expression
+         * @param left
+         * @param right
+         * @return pointer to an expression
+         */
+        static mini::MBinary* createAND(mini::MExpression* left, mini::MExpression* right);
+        /**
+         * Create an OR binary expression
+         * @param left
+         * @param right
+         * @return pointer to an expression
+         */
+        static mini::MBinary* createOR(mini::MExpression* left, mini::MExpression* right);
     };
 
 }
