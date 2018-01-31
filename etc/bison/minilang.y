@@ -110,11 +110,16 @@ ELSE_OPT
 EXPR[root]
     : EXPR[left] T_PLUS EXPR[right] {
         $root = mini::MExpressionFactory::createPlus($left, $right);
-        $root->evalType();
     }
-    | EXPR[left] T_MINUS EXPR[right]
-    | EXPR[left] T_MULT EXPR[right]
-    | EXPR[left] T_DIV EXPR[right]
+    | EXPR[left] T_MINUS EXPR[right] {
+        $root = mini::MExpressionFactory::createMinus($left, $right);
+    }
+    | EXPR[left] T_MULT EXPR[right] {
+        $root = mini::MExpressionFactory::createTimes($left, $right);
+    }
+    | EXPR[left] T_DIV EXPR[right] {
+        $root = mini::MExpressionFactory::createDivide($left, $right);
+    }
     | EXPR[left] T_IS_EQUAL EXPR[right]
     | EXPR[left] T_IS_NOT_EQUAL EXPR[right]
     | EXPR[left] T_AND EXPR[right]
