@@ -14,9 +14,6 @@ namespace mini {
         // Variable name
         std::string m_name;
 
-        // Variable expression
-        mini::MExpression* m_expression;
-
     public:
 
         /**
@@ -24,12 +21,6 @@ namespace mini {
          * @return enum
          */
         mini::TYPE getType() const { return m_type; }
-
-        /**
-         * Get variable expression
-         * @return expression
-         */
-        mini::MExpression* getExpression() { return m_expression; }
 
         /**
          * Get varibale name
