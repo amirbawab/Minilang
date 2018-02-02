@@ -141,7 +141,9 @@ EXPR[root]
     }
     | T_INTEGER
     | T_FLOAT
-    | T_STRING
+    | T_STRING {
+        mini::MValue<char*>* val = static_cast<mini::MValue<char*>*>($1);
+    }
     | T_IDENTIFIER
     | T_TRUE
     | T_FALSE

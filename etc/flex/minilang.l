@@ -82,7 +82,7 @@ FALSE {
 
 \"((\\[abfnrtv\"\\])|[ a-zA-Z0-9\~\@\#\$\%\^\&\*\-\+\/\`\<\>\=\_\|\'\.\,\;\:\!\?\{\}\[\]\(\)])*\"  {
     if(m_tokenFlag) std::cout << "T_STRING(" << yytext << ")" << std::endl;
-    yylval.m_expression = new mini::MValue<char*>(yytext);
+    yylval.m_expression = new mini::MValue<char*>(strdup(yytext));
     return T_STRING;
 }
 
