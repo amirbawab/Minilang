@@ -13,9 +13,6 @@ namespace mini {
         // Right operand
         MExpression* m_right;
 
-        // operator value
-        std::string m_operator;
-
     public:
 
         /**
@@ -51,5 +48,11 @@ namespace mini {
          * @see mini::MExpression::prettify
          */
         virtual std::string prettify();
+
+        /**
+         * Get operator of the binary operation
+         * @return string
+         */
+        std::string getOperator();
     };
 }

@@ -14,7 +14,7 @@ mini::TYPE mini::MBinary::evalType() {
         case B_AND:
         case B_OR:
             if(leftType != TYPE::BOOLEAN || rightType != TYPE::BOOLEAN) {
-                mini::error_exit(m_operator + " operator expects operators to be boolean");
+                mini::error_exit(getOperator() + " operator expects operators to be boolean");
             }
             return mini::TYPE::BOOLEAN;
 
@@ -26,7 +26,7 @@ mini::TYPE mini::MBinary::evalType() {
                       || leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::FLOAT) {
                 return mini::TYPE::FLOAT;
             } else {
-                mini::error_exit(m_operator + " expects operands to be integers or floats");
+                mini::error_exit(getOperator() + " expects operands to be integers or floats");
             }
 
         case B_TIMES:
@@ -37,9 +37,9 @@ mini::TYPE mini::MBinary::evalType() {
                 return mini::TYPE::FLOAT;
             } else if(leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::STRING
                       || leftType == mini::TYPE::STRING && rightType == mini::TYPE::INTEGER) {
-                return mini::TYPE::FLOAT;
+                return mini::TYPE::STRING;
             } else {
-                mini::error_exit(m_operator + " expects operands to be integers, floats, or an integer and a string");
+                mini::error_exit(getOperator() + " expects operands to be integers, floats, or an integer and a string");
             }
 
         case B_PLUS:
@@ -51,13 +51,13 @@ mini::TYPE mini::MBinary::evalType() {
             } else if(leftType == mini::TYPE::STRING && rightType == mini::TYPE::STRING) {
                 return mini::TYPE::STRING;
             } else {
-                mini::error_exit(m_operator + " expects operands to be integers or floats");
+                mini::error_exit(getOperator() + " expects operands to be integers or floats");
             }
 
         case B_IS_EQUAL:
         case B_IS_NOT_EQUAL:
             if(leftType != rightType) {
-                mini::error_exit(m_operator + " expects both operand to be of the same type");
+                mini::error_exit(getOperator() + " expects both operand to be of the same type");
             }
             return mini::TYPE::BOOLEAN;
 
@@ -68,35 +68,30 @@ mini::TYPE mini::MBinary::evalType() {
 
 std::string mini::MBinary::prettify() {
     std::stringstream ss;
-    std::string opt;
+    std::string opt = getOperator();
+    ss << "( " << m_left->prettify() << " " << opt << " " << m_right->prettify() << " )";
+    return ss.str();
+}
+
+std::string mini::MBinary::getOperator() {
     switch (m_kind) {
         case B_MINUS:
-            opt = " - ";
-            break;
+            return "-";
         case B_PLUS:
-            opt = " + ";
-            break;
+            return "+";
         case B_TIMES:
-            opt = " * ";
-            break;
+            return "*";
         case B_DIVIDE:
-            opt = " / ";
-            break;
+            return "/";
         case B_IS_EQUAL:
-            opt = " == ";
-            break;
+            return "==";
         case B_IS_NOT_EQUAL:
-            opt = " != ";
-            break;
+            return "!=";
         case B_AND:
-            opt =" && ";
-            break;
+            return "&&";
         case B_OR:
-            opt = " || ";
-            break;
+            return "||";
         default:
             throw std::runtime_error("Cannot prettify binary expression because kind is unknown");
     }
-    ss << "( " << m_left->prettify() << opt << m_right->prettify() << " )";
-    return ss.str();
 }
