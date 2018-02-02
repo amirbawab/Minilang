@@ -1,1 +1,1 @@
-var a : int = 4 + variable;
+var a : int = "a" + "b";
