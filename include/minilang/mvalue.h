@@ -49,5 +49,6 @@ namespace mini {
         MValue(mini::MIdentifier* value) : m_value(value) {m_kind = mini::MExpression::KIND::VALUE;}
         virtual mini::TYPE evalType();
         virtual std::string prettify();
+        void setExpression(mini::MExpression* expr);
     };
 }

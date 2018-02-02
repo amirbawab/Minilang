@@ -30,7 +30,7 @@ namespace mini {
          * Assign expression to identifier
          * @param expression
          */
-        void setExpression(mini::MExpression* expression) { m_expression = expression;}
+        void setExpression(mini::MExpression* expression);
 
         /**
          * @see mini::MExpression::evalType
