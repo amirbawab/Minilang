@@ -14,11 +14,14 @@ extern "C" int yylineno;
 #include <minilang/mvalue.h>
 #include <minilang/mexpression_factory.h>
 #include <minilang/mstatement_factory.h>
+#include <minilang/mscope.h>
+#include <vector>
 }
 
 %union {
-	mini::MStatement*       m_statement;
-	mini::MExpression*      m_expression;
+	mini::MStatement*                m_statement;
+	mini::MExpression*               m_expression;
+	std::vector<mini::MStatement*>*  m_statements;
 }
 
 // Define tokens
@@ -58,9 +61,10 @@ extern "C" int yylineno;
     ;
 
 // Non-terminal type
-%type <m_expression> EXPR
-%type <m_statement> STATEMENT
-%type <m_statement> ELSE_OPT
+%type <m_expression>    EXPR
+%type <m_statements>    STATEMENTS
+%type <m_statement>     STATEMENT
+%type <m_statement>     ELSE_OPT
 
 // Configure bison
 %locations
@@ -92,9 +96,17 @@ VAR_DEC
     }
     ;
 
-STATEMENTS
-    : STATEMENTS STATEMENT
-    | %empty
+STATEMENTS[root]
+    : STATEMENTS STATEMENT[statement] {
+        if(!$root) {
+            $root = new std::vector<mini::MStatement*>();
+        }
+        $root->push_back($statement);
+        std::cout << $root->size() << std::endl;
+    }
+    | %empty {
+        $root = nullptr;
+    }
     ;
 
 STATEMENT[root]
