@@ -12,5 +12,18 @@ namespace mini {
 
         // While loop statements
         std::vector<mini::MStatement*> m_statements;
+    public:
+
+        /**
+         * Add statement to this scope
+         * @param statement
+         */
+        void addStatement(mini::MStatement* statement);
+
+        /**
+         * Get statements
+         * @return vector of statements
+         */
+        std::vector<mini::MStatement*> getStatements() const { return m_statements; }
     };
 }
