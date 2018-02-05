@@ -97,9 +97,9 @@ VAR_DECS[root]
 
 VAR_DEC[root]
     : T_VAR T_IDENTIFIER[id] T_COLON TYPE T_EQUAL EXPR[expr] T_SEMICOLON {
-        mini::MValue<mini::MIdentifier*>* value = static_cast<mini::MValue<mini::MIdentifier*>*>($id);
+        mini::MIdentifier* value = static_cast<mini::MIdentifier*>($id);
         value->setExpression($expr);
-        $root = new mini::MVariable(value->m_value);
+        $root = new mini::MVariable(value);
     }
     ;
 
@@ -131,8 +131,8 @@ STATEMENT[root]
         $root = mini::MStatementFactory::createIdentifier($expr);
     }
     | T_READ T_IDENTIFIER[id] T_SEMICOLON {
-        mini::MValue<mini::MIdentifier*>* value = static_cast<mini::MValue<mini::MIdentifier*>*>($id);
-        $root = mini::MStatementFactory::createRead(value->m_value);
+        mini::MIdentifier* value = static_cast<mini::MIdentifier*>($id);
+        $root = mini::MStatementFactory::createRead(value);
     }
     | T_PRINT EXPR[expr] T_SEMICOLON {
         $root = mini::MStatementFactory::createPrint($expr);

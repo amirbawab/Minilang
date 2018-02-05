@@ -41,14 +41,4 @@ namespace mini {
         virtual mini::TYPE evalType();
         virtual std::string prettify();
     };
-
-    template <>
-    class MValue<mini::MIdentifier*> : public MExpression {
-    public:
-        mini::MIdentifier* m_value;
-        MValue(mini::MIdentifier* value) : m_value(value) {m_kind = mini::MExpression::KIND::VALUE;}
-        virtual mini::TYPE evalType();
-        virtual std::string prettify();
-        void setExpression(mini::MExpression* expr);
-    };
 }
