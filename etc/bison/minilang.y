@@ -24,6 +24,7 @@ extern "C" int yylineno;
 	mini::MStatement*                m_statement;
 	mini::MExpression*               m_expression;
 	std::vector<mini::MStatement*>*  m_statements;
+	std::vector<mini::MVariable*>*   m_variables;
 	mini::MVariable*                 m_variable;
 }
 
@@ -69,6 +70,7 @@ extern "C" int yylineno;
 %type <m_statement>     STATEMENT
 %type <m_statement>     ELSE_OPT
 %type <m_variable>      VAR_DEC
+%type <m_variables>     VAR_DECS
 
 // Configure bison
 %locations
@@ -86,13 +88,21 @@ extern "C" int yylineno;
 %%
 S
     : VAR_DECS[variables] STATEMENTS[statements] {
+        mini::MGlobal::getInstance()->setVariables($variables);
         mini::MGlobal::getInstance()->setStatements($statements);
     }
     ;
 
 VAR_DECS[root]
-    : VAR_DECS VAR_DEC
-    | %empty
+    : VAR_DECS VAR_DEC[variable] {
+        if(!$root) {
+            $root = new std::vector<mini::MVariable*>();
+        }
+        $root->push_back($variable);
+    }
+    | %empty {
+        $root = nullptr;
+    }
     ;
 
 VAR_DEC[root]
