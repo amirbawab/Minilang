@@ -20,6 +20,8 @@ mini::TYPE mini::MUnary::evalType() {
                 mini::error_exit("unary operator ! expects the operand to be a boolean");
             }
             return mini::TYPE::BOOLEAN;
+        default:
+            throw std::runtime_error("Unrecognized type while evaluating the type of the expression");
     }
 }
 
