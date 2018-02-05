@@ -13,9 +13,11 @@ extern "C" int yylineno;
 #include <memory>
 #include <minilang/mvalue.h>
 #include <minilang/mexpression_factory.h>
+#include <minilang/mstatement.h>
 }
 
 %union {
+	mini::MStatement*       m_statement;
 	mini::MExpression*      m_expression;
 }
 
@@ -57,6 +59,8 @@ extern "C" int yylineno;
 
 // Non-terminal type
 %type <m_expression> EXPR
+%type <m_statement> STATEMENT
+%type <m_statement> ELSE_OPT
 
 // Configure bison
 %locations
@@ -72,7 +76,7 @@ extern "C" int yylineno;
 %left P_NEG P_NOT
 
 %%
-S
+S[root]
     : VAR_DECS STATEMENTS 
     ;
 
@@ -84,8 +88,7 @@ VAR_DECS
 VAR_DEC
     : T_VAR T_IDENTIFIER[id] T_COLON TYPE T_EQUAL EXPR[expr] T_SEMICOLON {
         mini::MValue<mini::MIdentifier*>* value = static_cast<mini::MValue<mini::MIdentifier*>*>($id);
-        value->setExpression($expr);
-        std::cout << "expression = " << $expr->prettify() << std::endl;
+        //value->setExpression($expr);
     }
     ;
 
@@ -94,17 +97,31 @@ STATEMENTS
     | %empty
     ;
 
-STATEMENT
-    : T_WHILE EXPR T_LCURL STATEMENTS T_RCURL
-    | T_IF EXPR T_LCURL STATEMENTS T_RCURL ELSE_OPT
-    | T_IDENTIFIER T_EQUAL EXPR T_SEMICOLON
-    | T_READ T_IDENTIFIER T_SEMICOLON
-    | T_PRINT EXPR T_SEMICOLON
+STATEMENT[root]
+    : T_WHILE EXPR T_LCURL STATEMENTS T_RCURL {
+        std::cout << "while statement" << std::endl;
+    }
+    | T_IF EXPR T_LCURL STATEMENTS T_RCURL ELSE_OPT {
+        std::cout << "if statement" << std::endl;
+    }
+    | T_IDENTIFIER T_EQUAL EXPR T_SEMICOLON {
+        std::cout << "assign statement" << std::endl;
+    }
+    | T_READ T_IDENTIFIER T_SEMICOLON {
+        std::cout << "read statement" << std::endl;
+    }
+    | T_PRINT EXPR T_SEMICOLON {
+        std::cout << "print statement" << std::endl;
+    }
     ;
 
-ELSE_OPT
-    : T_ELSE T_LCURL STATEMENTS T_RCURL
-    | %empty
+ELSE_OPT[root]
+    : T_ELSE T_LCURL STATEMENTS T_RCURL {
+        std::cout << "else statement" << std::endl;
+    }
+    | %empty {
+        $root = nullptr;
+    }
     ;
 
 EXPR[root]

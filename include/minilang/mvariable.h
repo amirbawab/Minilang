@@ -14,6 +14,9 @@ namespace mini {
         // Variable name
         std::string m_name;
 
+        // Variable expression value
+        mini::MExpression* m_expression = nullptr;
+
     public:
 
         /**
@@ -27,5 +30,17 @@ namespace mini {
          * @return string name
          */
         std::string getName() const {return m_name;}
+
+        /**
+         * Set variable expression value
+         * @param expression
+         */
+        void setExpression(mini::MExpression* expression) {m_expression = expression;}
+
+        /**
+         * Get expression
+         * @return expression
+         */
+        mini::MExpression* getExpression() const { return m_expression; }
     };
 }
