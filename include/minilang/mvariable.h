@@ -1,7 +1,7 @@
 #pragma once
 
 #include <minilang/mtype.h>
-#include <minilang/mexpression.h>
+#include <minilang/midentifier.h>
 #include <memory>
 
 namespace mini {
@@ -14,10 +14,11 @@ namespace mini {
         // Variable name
         std::string m_name;
 
-        // Variable expression value
-        mini::MExpression* m_expression = nullptr;
+        // Variable identifier
+        mini::MIdentifier* m_identifier = nullptr;
 
     public:
+        MVariable(mini::MIdentifier* identifier) : m_identifier(identifier){}
 
         /**
          * Get varibale type
@@ -32,15 +33,9 @@ namespace mini {
         std::string getName() const {return m_name;}
 
         /**
-         * Set variable expression value
-         * @param expression
+         * Get identifier
+         * @return identifier
          */
-        void setExpression(mini::MExpression* expression) {m_expression = expression;}
-
-        /**
-         * Get expression
-         * @return expression
-         */
-        mini::MExpression* getExpression() const { return m_expression; }
+        mini::MIdentifier* getIdentifier() const { return m_identifier; }
     };
 }

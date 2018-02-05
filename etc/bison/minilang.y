@@ -15,6 +15,8 @@ extern "C" int yylineno;
 #include <minilang/mexpression_factory.h>
 #include <minilang/mstatement_factory.h>
 #include <minilang/mscope.h>
+#include <minilang/mglobal.h>
+#include <minilang/mvariable.h>
 #include <vector>
 }
 
@@ -22,6 +24,7 @@ extern "C" int yylineno;
 	mini::MStatement*                m_statement;
 	mini::MExpression*               m_expression;
 	std::vector<mini::MStatement*>*  m_statements;
+	mini::MVariable*                 m_variable;
 }
 
 // Define tokens
@@ -65,6 +68,7 @@ extern "C" int yylineno;
 %type <m_statements>    STATEMENTS
 %type <m_statement>     STATEMENT
 %type <m_statement>     ELSE_OPT
+%type <m_variable>      VAR_DEC
 
 // Configure bison
 %locations
@@ -80,19 +84,22 @@ extern "C" int yylineno;
 %left P_NEG P_NOT
 
 %%
-S[root]
-    : VAR_DECS STATEMENTS 
+S
+    : VAR_DECS[variables] STATEMENTS[statements] {
+        mini::MGlobal::getInstance()->setStatements($statements);
+    }
     ;
 
-VAR_DECS
+VAR_DECS[root]
     : VAR_DECS VAR_DEC
     | %empty
     ;
 
-VAR_DEC
+VAR_DEC[root]
     : T_VAR T_IDENTIFIER[id] T_COLON TYPE T_EQUAL EXPR[expr] T_SEMICOLON {
         mini::MValue<mini::MIdentifier*>* value = static_cast<mini::MValue<mini::MIdentifier*>*>($id);
-        //value->setExpression($expr);
+        value->setExpression($expr);
+        $root = new mini::MVariable(value->m_value);
     }
     ;
 
@@ -102,7 +109,6 @@ STATEMENTS[root]
             $root = new std::vector<mini::MStatement*>();
         }
         $root->push_back($statement);
-        std::cout << $root->size() << std::endl;
     }
     | %empty {
         $root = nullptr;
@@ -110,12 +116,15 @@ STATEMENTS[root]
     ;
 
 STATEMENT[root]
-    : T_WHILE EXPR[expr] T_LCURL STATEMENTS T_RCURL {
-        $root = mini::MStatementFactory::createWhile($expr);
+    : T_WHILE EXPR[expr] T_LCURL STATEMENTS[statements] T_RCURL {
+        mini::MWhile* whileStmt = mini::MStatementFactory::createWhile($expr);
+        whileStmt->setStatements($statements);
+        $root = whileStmt;
     }
-    | T_IF EXPR[expr] T_LCURL STATEMENTS T_RCURL ELSE_OPT[else] {
+    | T_IF EXPR[expr] T_LCURL STATEMENTS[statements] T_RCURL ELSE_OPT[else] {
         mini::MIf* ifStmt = mini::MStatementFactory::createIf($expr);
         ifStmt->setElse($else);
+        ifStmt->setStatements($statements);
         $root = ifStmt;
     }
     | T_IDENTIFIER T_EQUAL EXPR[expr] T_SEMICOLON {
@@ -131,8 +140,10 @@ STATEMENT[root]
     ;
 
 ELSE_OPT[root]
-    : T_ELSE T_LCURL STATEMENTS T_RCURL {
-        $root = mini::MStatementFactory::createElse();
+    : T_ELSE T_LCURL STATEMENTS[statements] T_RCURL {
+        mini::MElse* elseStmt = mini::MStatementFactory::createElse();
+        elseStmt->setStatements($statements);
+        $root = elseStmt;
     }
     | %empty {
         $root = nullptr;

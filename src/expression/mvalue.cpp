@@ -1,4 +1,5 @@
 #include <minilang/mvalue.h>
+#include <minilang/mvariable.h>
 #include <sstream>
 
 /**********

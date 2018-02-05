@@ -11,19 +11,19 @@ namespace mini {
         std::vector<mini::MScope*> m_scopes;
 
         // While loop statements
-        std::vector<mini::MStatement*> m_statements;
+        std::vector<mini::MStatement*>* m_statements;
     public:
 
         /**
-         * Add statement to this scope
-         * @param statement
+         * Set statement to this scope
+         * @param statements
          */
-        void addStatement(mini::MStatement* statement);
+        void setStatements(std::vector<mini::MStatement*>* statements) {m_statements = statements;};
 
         /**
          * Get statements
          * @return vector of statements
          */
-        std::vector<mini::MStatement*> getStatements() const { return m_statements; }
+        std::vector<mini::MStatement*>* getStatements() const { return m_statements; }
     };
 }

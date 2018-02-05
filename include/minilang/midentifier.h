@@ -1,9 +1,10 @@
 #pragma once
 
-#include <minilang/mvariable.h>
+#include <minilang/mexpression.h>
 #include <minilang/mstatement.h>
 
 namespace mini {
+    class MVariable;
     class MIdentifier : public mini::MExpression, public mini::MStatement {
     private:
 
@@ -36,7 +37,7 @@ namespace mini {
          * Assign expression to identifier
          * @param expression
          */
-        void setExpression(mini::MExpression* expression);
+        void setExpression(mini::MExpression* expression) {m_expression = expression;}
 
         /**
          * @see mini::MExpression::evalType
