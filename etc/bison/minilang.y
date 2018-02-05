@@ -13,7 +13,7 @@ extern "C" int yylineno;
 #include <memory>
 #include <minilang/mvalue.h>
 #include <minilang/mexpression_factory.h>
-#include <minilang/mstatement.h>
+#include <minilang/mstatement_factory.h>
 }
 
 %union {
@@ -98,26 +98,29 @@ STATEMENTS
     ;
 
 STATEMENT[root]
-    : T_WHILE EXPR T_LCURL STATEMENTS T_RCURL {
-        std::cout << "while statement" << std::endl;
+    : T_WHILE EXPR[expr] T_LCURL STATEMENTS T_RCURL {
+        $root = mini::MStatementFactory::createWhile($expr);
     }
-    | T_IF EXPR T_LCURL STATEMENTS T_RCURL ELSE_OPT {
-        std::cout << "if statement" << std::endl;
+    | T_IF EXPR[expr] T_LCURL STATEMENTS T_RCURL ELSE_OPT[else] {
+        mini::MIf* ifStmt = mini::MStatementFactory::createIf($expr);
+        ifStmt->setElse($else);
+        $root = ifStmt;
     }
-    | T_IDENTIFIER T_EQUAL EXPR T_SEMICOLON {
-        std::cout << "assign statement" << std::endl;
+    | T_IDENTIFIER T_EQUAL EXPR[expr] T_SEMICOLON {
+        $root = mini::MStatementFactory::createIdentifier($expr);
     }
-    | T_READ T_IDENTIFIER T_SEMICOLON {
-        std::cout << "read statement" << std::endl;
+    | T_READ T_IDENTIFIER[id] T_SEMICOLON {
+        mini::MValue<mini::MIdentifier*>* value = static_cast<mini::MValue<mini::MIdentifier*>*>($id);
+        $root = mini::MStatementFactory::createRead(value->m_value);
     }
-    | T_PRINT EXPR T_SEMICOLON {
-        std::cout << "print statement" << std::endl;
+    | T_PRINT EXPR[expr] T_SEMICOLON {
+        $root = mini::MStatementFactory::createPrint($expr);
     }
     ;
 
 ELSE_OPT[root]
     : T_ELSE T_LCURL STATEMENTS T_RCURL {
-        std::cout << "else statement" << std::endl;
+        $root = mini::MStatementFactory::createElse();
     }
     | %empty {
         $root = nullptr;

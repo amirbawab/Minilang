@@ -5,9 +5,10 @@
 #include <minilang/midentifier.h>
 #include <minilang/mprint.h>
 #include <minilang/mread.h>
+#include <minilang/melse.h>
 
 namespace mini {
-    class MStatement_factory {
+    class MStatementFactory {
     public:
 
         /**
@@ -23,6 +24,12 @@ namespace mini {
          * @return pointer to an if statement
          */
         static mini::MIf* createIf(mini::MExpression* condition);
+
+        /**
+         * Create else statement
+         * @return pointer to an else statement
+         */
+        static mini::MElse* createElse();
 
         /**
          * Create identifier
