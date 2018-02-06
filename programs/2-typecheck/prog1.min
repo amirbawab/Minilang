@@ -1,4 +1,5 @@
 var a : float = 1;
+var b : int = 1;
 a = 32;
 while 1 {
 

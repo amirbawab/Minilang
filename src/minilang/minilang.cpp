@@ -145,7 +145,7 @@ int main(int argc, char** argv) {
     // Scan/Parse
     if(m_tokenFlag || m_scanFlag) {
         while (yylex()) {}
-    } else if(m_prettyFlag || m_parseFlag || m_typecheckFlag) {
+    } else if(m_prettyFlag || m_parseFlag || m_typecheckFlag || m_codegenFlag || m_symbolFlag) {
         do { yyparse(); } while (!feof(yyin));
     }
 
@@ -155,8 +155,18 @@ int main(int argc, char** argv) {
     }
 
     // Type checking
-    if(m_typecheckFlag) {
+    if(m_typecheckFlag || m_symbolFlag) {
         mini::MGlobal::getInstance()->typeCheck();
+    }
+
+    // Print symbol table
+    if(m_symbolFlag) {
+        std::cout << mini::MGlobal::getInstance()->toSymbolTable() << std::endl;
+    }
+
+    // Generate code
+    if(m_codegenFlag) {
+
     }
 
     return CODE_SUCCESS;

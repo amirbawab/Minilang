@@ -53,5 +53,11 @@ namespace mini {
          * Type check
          */
         void typeCheck();
+
+        /**
+         * Generate symbol table
+         * @return symbol table
+         */
+        std::string toSymbolTable();
     };
 }

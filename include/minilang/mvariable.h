@@ -55,5 +55,11 @@ namespace mini {
          * Check if type is compatible
          */
         void compatibleExpr(mini::MExpression* expression);
+
+        /**
+         * Get type in minilang syntax
+         * @return string
+         */
+        std::string getMiniType();
     };
 }

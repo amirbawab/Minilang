@@ -43,3 +43,15 @@ void mini::MGlobal::typeCheck() {
         }
     }
 }
+
+std::string mini::MGlobal::toSymbolTable() {
+    std::stringstream ss;
+    ss << "---- Global Scope ----" << std::endl;
+    if(m_variables) {
+        for(mini::MVariable* variable : *m_variables) {
+            ss << variable->getIdentifier()->getName() << " : " << variable->getMiniType() << std::endl;
+        }
+    }
+    ss << "----------------------" << std::endl;
+    return ss.str();
+}
