@@ -28,9 +28,9 @@ void mini::MIdentifier::typeCheck() {
 }
 
 void mini::MIdentifier::linkVariable() {
-    mini::MVariable* variable = mini::MGlobal::getInstance()->findVariable(m_name);
-    if(!variable) {
+    std::vector<mini::MVariable*> variables = mini::MGlobal::getInstance()->findVariables(m_name);
+    if(variables.size() > 1) {
         mini::error_exit("Identifier " + m_name + " was not declared");
     }
-    m_variable = variable;
+    m_variable = variables.front();
 }

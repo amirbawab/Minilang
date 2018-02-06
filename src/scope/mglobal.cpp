@@ -18,13 +18,27 @@ std::string mini::MGlobal::prettify(int indent) {
     return ss.str();
 }
 
-mini::MVariable* mini::MGlobal::findVariable(std::string name) {
+std::vector<mini::MVariable*> mini::MGlobal::findVariables(std::string name) {
+    std::vector<mini::MVariable*> variables;
     if(m_variables) {
         for(mini::MVariable* variable : *m_variables) {
             if(name == variable->getIdentifier()->getName()) {
-                return variable;
+                variables.push_back(variable);
             }
         }
     }
-    return nullptr;
+    return variables;
+}
+
+void mini::MGlobal::typeCheck() {
+    if(m_variables) {
+        for(mini::MVariable* variable : *m_variables) {
+            variable->checkExist();
+        }
+    }
+    if(m_statements) {
+        for(mini::MStatement* statement : *m_statements) {
+            statement->typeCheck();
+        }
+    }
 }

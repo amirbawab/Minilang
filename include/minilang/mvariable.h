@@ -40,5 +40,10 @@ namespace mini {
          * @return prettify code
          */
         std::string prettify(int indent);
+
+        /**
+         * Check if variable already exists
+         */
+        void checkExist();
     };
 }

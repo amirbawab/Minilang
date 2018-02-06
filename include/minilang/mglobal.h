@@ -45,8 +45,13 @@ namespace mini {
         /**
          * Find variable
          * @param name
-         * @return variable pointer | nullptr
+         * @return vector of variables
          */
-        mini::MVariable* findVariable(std::string name);
+        std::vector<mini::MVariable*> findVariables(std::string name);
+
+        /**
+         * Type check
+         */
+        void typeCheck();
     };
 }

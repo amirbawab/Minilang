@@ -145,13 +145,18 @@ int main(int argc, char** argv) {
     // Scan/Parse
     if(m_tokenFlag || m_scanFlag) {
         while (yylex()) {}
-    } else if(m_prettyFlag || m_parseFlag) {
+    } else if(m_prettyFlag || m_parseFlag || m_typecheckFlag) {
         do { yyparse(); } while (!feof(yyin));
     }
 
     // Prettify
     if(m_prettyFlag) {
         std::cout << mini::MGlobal::getInstance()->prettify(0) << std::endl;
+    }
+
+    // Type checking
+    if(m_typecheckFlag) {
+        mini::MGlobal::getInstance()->typeCheck();
     }
 
     return CODE_SUCCESS;

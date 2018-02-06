@@ -1,6 +1,9 @@
 #include <minilang/mvariable.h>
 #include <minilang/mutils.h>
+#include <minilang/mglobal.h>
+#include <minilang/mreport.h>
 #include <sstream>
+#include <iostream>
 
 std::string mini::MVariable::prettify(int indent) {
     std::stringstream ss;
@@ -23,4 +26,11 @@ std::string mini::MVariable::prettify(int indent) {
     }
     ss << " = " << m_identifier->getExpression()->prettify() << ";";
     return ss.str();
+}
+
+void mini::MVariable::checkExist() {
+    std::vector<mini::MVariable*> variables = mini::MGlobal::getInstance()->findVariables(m_identifier->getName());
+    if(variables.size() > 1) {
+        mini::error_exit("Variable " + m_identifier->getName() +" already declared");
+    }
 }
