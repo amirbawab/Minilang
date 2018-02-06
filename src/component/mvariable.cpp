@@ -1,8 +1,10 @@
 #include <minilang/mvariable.h>
+#include <minilang/mutils.h>
 #include <sstream>
 
-std::string mini::MVariable::prettify() {
+std::string mini::MVariable::prettify(int indent) {
     std::stringstream ss;
+    ss << mini::utils::indent(indent);
     switch (m_type) {
         case mini::TYPE::STRING:
             ss << "char*";
@@ -19,6 +21,6 @@ std::string mini::MVariable::prettify() {
         default:
             throw std::runtime_error("Cannot generate code for a variable with an undefined type");
     }
-    ss << " " << m_identifier->getName() << " = " << m_identifier->getExpression()->prettify() << ";" << std::endl;
+    ss << " " << m_identifier->getName() << " = " << m_identifier->getExpression()->prettify() << ";";
     return ss.str();
 }

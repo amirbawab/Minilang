@@ -10,7 +10,7 @@ namespace mini {
         MGlobal(){}
 
         // Variables
-        std::vector<mini::MVariable*>* m_variables;
+        std::vector<mini::MVariable*>* m_variables = nullptr;
     public:
         /**
          * Get single instance of this class

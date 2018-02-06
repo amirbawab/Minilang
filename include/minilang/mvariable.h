@@ -33,6 +33,6 @@ namespace mini {
          * Prettify code
          * @return prettify code
          */
-        std::string prettify();
+        std::string prettify(int indent);
     };
 }

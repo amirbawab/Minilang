@@ -90,6 +90,7 @@ S
     : VAR_DECS[variables] STATEMENTS[statements] {
         mini::MGlobal::getInstance()->setVariables($variables);
         mini::MGlobal::getInstance()->setStatements($statements);
+        std::cout << mini::MGlobal::getInstance()->prettify(0) << std::endl;
     }
     ;
 

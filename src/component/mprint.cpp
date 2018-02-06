@@ -4,7 +4,6 @@
 
 std::string mini::MPrint::prettify(int indent) {
     std::stringstream ss;
-    // FIXME
-    ss << mini::utils::indent(indent) << "printf ( " << m_expression->prettify() << " );" << std::endl;
+    ss << mini::utils::indent(indent) << "print " << m_expression->prettify() << ";";
     return ss.str();
 }

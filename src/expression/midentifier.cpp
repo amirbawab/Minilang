@@ -17,6 +17,6 @@ std::string mini::MIdentifier::prettify() {
 
 std::string mini::MIdentifier::prettify(int indent) {
     std::stringstream ss;
-    ss << mini::utils::indent(indent) << getName() << std::endl;
+    ss << mini::utils::indent(indent) << getName() << " = " << m_expression->prettify() << ";";
     return ss.str();
 }

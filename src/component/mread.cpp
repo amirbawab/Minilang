@@ -4,7 +4,6 @@
 
 std::string mini::MRead::prettify(int indent) {
     std::stringstream ss;
-    // FIXME
-    ss << mini::utils::indent(indent) << "scanf (" << m_identifier->getName() << ");"<< std::endl;
+    ss << mini::utils::indent(indent) << "read " << m_identifier->getName() << ";";
     return ss.str();
 }
