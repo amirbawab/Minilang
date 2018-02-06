@@ -34,3 +34,22 @@ void mini::MIf::typeCheck() {
         }
     }
 }
+
+std::string mini::MIf::toC(int indent) {
+    std::stringstream ss;
+    ss << mini::utils::indent(indent) << "if " << m_condition->prettify() << " {";
+    if(m_statements) {
+        ss << std::endl;
+        for(mini::MStatement* statement : *m_statements) {
+            ss << statement->toC(indent+1) << std::endl;
+        }
+        ss << mini::utils::indent(indent);
+    }
+    ss << "}";
+
+    // Else statement (if exists)
+    if(m_else) {
+        ss << m_else->toC(indent);
+    }
+    return ss.str();
+}

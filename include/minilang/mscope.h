@@ -29,5 +29,12 @@ namespace mini {
          * @return pretty code
          */
         virtual std::string prettify(int indent) = 0;
+
+        /**
+         * Generate C code
+         * @param indent
+         * @return c code
+         */
+        virtual std::string toC(int indent) = 0;
     };
 }

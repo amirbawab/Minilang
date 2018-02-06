@@ -155,7 +155,7 @@ int main(int argc, char** argv) {
     }
 
     // Type checking
-    if(m_typecheckFlag || m_symbolFlag) {
+    if(m_typecheckFlag || m_symbolFlag || m_codegenFlag) {
         mini::MGlobal::getInstance()->typeCheck();
     }
 
@@ -166,7 +166,7 @@ int main(int argc, char** argv) {
 
     // Generate code
     if(m_codegenFlag) {
-
+        std::cout << mini::MGlobal::getInstance()->toC(0) << std::endl;
     }
 
     return CODE_SUCCESS;

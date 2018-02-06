@@ -42,6 +42,12 @@ namespace mini {
         std::string prettify(int indent);
 
         /**
+         * Generated code
+         * @return C code
+         */
+        std::string toC(int indent);
+
+        /**
          * Check if variable already
          */
         void checkExist();
@@ -61,5 +67,11 @@ namespace mini {
          * @return string
          */
         std::string getMiniType();
+
+        /**
+         * Get type in c syntax
+         * @return string
+         */
+        std::string getCType();
     };
 }

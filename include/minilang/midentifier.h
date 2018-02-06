@@ -66,6 +66,11 @@ namespace mini {
         std::string prettify(int indent);
 
         /**
+         * @see mini::MStatement::toC
+         */
+        std::string toC(int indent);
+
+        /**
          * @see mini::MStatement::typeCheck
          */
         void typeCheck();

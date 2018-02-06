@@ -11,3 +11,9 @@ std::string mini::MRead::prettify(int indent) {
 void mini::MRead::typeCheck() {
     m_identifier->typeCheck();
 }
+
+std::string mini::MRead::toC(int indent) {
+    std::stringstream ss;
+    ss << mini::utils::indent(indent) << "scanf (" << m_identifier->getName() << " );";
+    return ss.str();
+}

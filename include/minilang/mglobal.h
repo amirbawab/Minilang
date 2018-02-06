@@ -43,6 +43,11 @@ namespace mini {
         std::string prettify(int indent);
 
         /**
+         * @see mini::MScope::toC
+         */
+        std::string toC(int indent);
+
+        /**
          * Find variable
          * @param name
          * @return vector of variables

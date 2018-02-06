@@ -29,6 +29,11 @@ namespace mini {
          * @see mini::MStatement::typeCheck
          */
         void typeCheck();
+
+        /**
+         * @see mini::MStatement::toC
+         */
+        std::string toC(int indent);
     };
 }
 

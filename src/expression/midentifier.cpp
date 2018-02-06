@@ -21,6 +21,12 @@ std::string mini::MIdentifier::prettify(int indent) {
     return ss.str();
 }
 
+std::string mini::MIdentifier::toC(int indent) {
+    std::stringstream ss;
+    ss << mini::utils::indent(indent) << getName() << " = " << m_expression->prettify() << ";";
+    return ss.str();
+}
+
 void mini::MIdentifier::typeCheck() {
     linkVariable();
     m_variable->compatibleExpr(m_expression);

@@ -8,6 +8,13 @@ std::string mini::MPrint::prettify(int indent) {
     return ss.str();
 }
 
+std::string mini::MPrint::toC(int indent) {
+    std::stringstream ss;
+    // FIXME
+    ss << mini::utils::indent(indent) << "printf (" << m_expression->prettify() << " );";
+    return ss.str();
+}
+
 void mini::MPrint::typeCheck() {
     m_expression->evalType();
 }
