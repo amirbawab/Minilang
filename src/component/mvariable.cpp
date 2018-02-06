@@ -20,8 +20,8 @@ std::string mini::MVariable::toC(int indent) {
 }
 
 void mini::MVariable::checkExist() {
-    std::vector<mini::MVariable*> variables = mini::MGlobal::getInstance()->findVariables(m_identifier->getName());
-    if(variables.size() > 1) {
+    mini::MVariable* variable = mini::MGlobal::getInstance()->findVariable(m_identifier->getName());
+    if(variable) {
         mini::error_exit("Variable " + m_identifier->getName() +" already declared");
     }
 }

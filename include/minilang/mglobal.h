@@ -2,6 +2,7 @@
 
 #include <minilang/mscope.h>
 #include <minilang/mvariable.h>
+#include <minilang/mtable.h>
 
 namespace mini {
     class MGlobal : public MScope {
@@ -11,6 +12,9 @@ namespace mini {
 
         // Variables
         std::vector<mini::MVariable*>* m_variables = nullptr;
+
+        // Symbol table
+        mini::MTable m_table;
     public:
         /**
          * Get single instance of this class
@@ -50,9 +54,9 @@ namespace mini {
         /**
          * Find variable
          * @param name
-         * @return vector of variables
+         * @return variable | nullptr
          */
-        std::vector<mini::MVariable*> findVariables(std::string name);
+        mini::MVariable* findVariable(std::string name);
 
         /**
          * Type check
@@ -60,7 +64,7 @@ namespace mini {
         void typeCheck();
 
         /**
-         * Generate symbol table
+         * Get symbol table
          * @return symbol table
          */
         std::string toSymbolTable();

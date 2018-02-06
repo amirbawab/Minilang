@@ -33,12 +33,11 @@ void mini::MIdentifier::typeCheck() {
 }
 
 void mini::MIdentifier::linkVariable() {
-    // FIXME var a : int = b; var b : int = a;
-    std::vector<mini::MVariable*> variables = mini::MGlobal::getInstance()->findVariables(m_name);
+    mini::MVariable* variable = mini::MGlobal::getInstance()->findVariable(m_name);
 
     // If not variable found
-    if(variables.empty()) {
+    if(!variable) {
         mini::error_exit("Identifier " + m_name + " was not declared");
     }
-    m_variable = variables.front();
+    m_variable = variable;
 }

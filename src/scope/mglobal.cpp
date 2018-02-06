@@ -19,16 +19,8 @@ std::string mini::MGlobal::prettify(int indent) {
     return ss.str();
 }
 
-std::vector<mini::MVariable*> mini::MGlobal::findVariables(std::string name) {
-    std::vector<mini::MVariable*> variables;
-    if(m_variables) {
-        for(mini::MVariable* variable : *m_variables) {
-            if(name == variable->getIdentifier()->getName()) {
-                variables.push_back(variable);
-            }
-        }
-    }
-    return variables;
+mini::MVariable* mini::MGlobal::findVariable(std::string name) {
+    return m_table.getVariable(name);
 }
 
 void mini::MGlobal::typeCheck() {
@@ -36,6 +28,7 @@ void mini::MGlobal::typeCheck() {
         for(mini::MVariable* variable : *m_variables) {
             variable->checkExist();
             variable->typeCheck();
+            m_table.registerVariable(variable);
         }
     }
     if(m_statements) {
@@ -43,18 +36,6 @@ void mini::MGlobal::typeCheck() {
             statement->typeCheck();
         }
     }
-}
-
-std::string mini::MGlobal::toSymbolTable() {
-    std::stringstream ss;
-    ss << "---- Global Scope ----" << std::endl;
-    if(m_variables) {
-        for(mini::MVariable* variable : *m_variables) {
-            ss << variable->getIdentifier()->getName() << " : " << variable->getMiniType() << std::endl;
-        }
-    }
-    ss << "----------------------" << std::endl;
-    return ss.str();
 }
 
 std::string mini::MGlobal::toC(int indent) {
@@ -75,4 +56,8 @@ std::string mini::MGlobal::toC(int indent) {
     ss << mini::utils::indent(indent+1) << "return (0);" << std::endl;
     ss << "}" << std::endl;
     return ss.str();
+}
+
+std::string mini::MGlobal::toSymbolTable() {
+    return m_table.str();
 }

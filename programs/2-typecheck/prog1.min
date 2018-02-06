@@ -1,6 +1,2 @@
-var a : int = 1;
-var b : int = 1;
-while (1) {
-    a = 3;
-}
-
+var a : int = a;
+var b : int = a;
