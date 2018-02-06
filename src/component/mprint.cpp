@@ -7,3 +7,7 @@ std::string mini::MPrint::prettify(int indent) {
     ss << mini::utils::indent(indent) << "print " << m_expression->prettify() << ";";
     return ss.str();
 }
+
+void mini::MPrint::typeCheck() {
+    m_expression->evalType();
+}

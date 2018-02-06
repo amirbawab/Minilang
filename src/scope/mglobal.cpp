@@ -17,3 +17,14 @@ std::string mini::MGlobal::prettify(int indent) {
     }
     return ss.str();
 }
+
+mini::MVariable* mini::MGlobal::findVariable(std::string name) {
+    if(m_variables) {
+        for(mini::MVariable* variable : *m_variables) {
+            if(name == variable->getIdentifier()->getName()) {
+                return variable;
+            }
+        }
+    }
+    return nullptr;
+}

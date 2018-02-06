@@ -12,5 +12,10 @@ namespace mini {
          * @return pretty code
          */
         virtual std::string prettify(int indent) = 0;
+
+        /**
+         * Check type
+         */
+        virtual void typeCheck() = 0;
     };
 }

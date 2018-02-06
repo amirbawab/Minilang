@@ -16,3 +16,11 @@ std::string mini::MElse::prettify(int indent) {
     ss << "}";
     return ss.str();
 }
+
+void mini::MElse::typeCheck() {
+    if(m_statements) {
+        for(mini::MStatement* statement : *m_statements) {
+            statement->typeCheck();
+        }
+    }
+}

@@ -53,16 +53,26 @@ namespace mini {
         /**
          * @see mini::MExpression::evalType
          */
-        virtual mini::TYPE evalType();
+        mini::TYPE evalType();
 
         /**
          * @see mini::MExpression::prettify
          */
-        virtual std::string prettify();
+        std::string prettify();
 
         /**
          * @see mini::MStatement::prettify
          */
-        virtual std::string prettify(int indent);
+        std::string prettify(int indent);
+
+        /**
+         * @see mini::MStatement::typeCheck
+         */
+        void typeCheck();
+
+        /**
+         * Link to referece variable
+         */
+        void linkVariable();
     };
 }

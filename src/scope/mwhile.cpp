@@ -1,5 +1,6 @@
 #include <minilang/mwhile.h>
 #include <minilang/mutils.h>
+#include <minilang/mreport.h>
 #include <sstream>
 
 std::string mini::MWhile::prettify(int indent) {
@@ -14,4 +15,16 @@ std::string mini::MWhile::prettify(int indent) {
     }
     ss << "}";
     return ss.str();
+}
+
+void mini::MWhile::typeCheck() {
+    if(m_condition->evalType() != mini::TYPE::BOOLEAN) {
+        mini::error_exit("While condition must evaluate to boolean");
+    }
+
+    if(m_statements) {
+        for(mini::MStatement* statement : *m_statements) {
+            statement->typeCheck();
+        }
+    }
 }

@@ -7,3 +7,7 @@ std::string mini::MRead::prettify(int indent) {
     ss << mini::utils::indent(indent) << "read " << m_identifier->getName() << ";";
     return ss.str();
 }
+
+void mini::MRead::typeCheck() {
+    m_identifier->typeCheck();
+}

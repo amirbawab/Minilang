@@ -203,18 +203,16 @@ EXPR[root]
     }
     | T_INTEGER
     | T_FLOAT
-    | T_STRING {
-        mini::MValue<char*>* val = static_cast<mini::MValue<char*>*>($1);
-    }
+    | T_STRING
     | T_IDENTIFIER
     | T_TRUE
     | T_FALSE
     ;
 
-TYPE[root]
-    : T_TYPE_INT        {$root = $1;}
-    | T_TYPE_FLOAT      {$root = $1;}
-    | T_TYPE_STRING     {$root = $1;}
-    | T_TYPE_BOOLEAN    {$root = $1;}
+TYPE
+    : T_TYPE_INT
+    | T_TYPE_FLOAT
+    | T_TYPE_STRING
+    | T_TYPE_BOOLEAN
     ;
 %%

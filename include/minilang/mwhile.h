@@ -24,6 +24,11 @@ namespace mini {
          * @see mini::MScope::prettify
          */
         std::string prettify(int indent);
+
+        /**
+         * @see mini::MStatement::typeCheck
+         */
+        void typeCheck();
     };
 }
 

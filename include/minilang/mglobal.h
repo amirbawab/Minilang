@@ -41,5 +41,12 @@ namespace mini {
          * @see mini::MScope::prettify
          */
         std::string prettify(int indent);
+
+        /**
+         * Find variable
+         * @param name
+         * @return variable pointer | nullptr
+         */
+        mini::MVariable* findVariable(std::string name);
     };
 }

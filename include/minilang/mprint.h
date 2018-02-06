@@ -23,5 +23,10 @@ namespace mini {
          * @see mini::MStatement::prettify
          */
         std::string prettify(int indent);
+
+        /**
+         * @see mini::MStatement::typeCheck
+         */
+        void typeCheck();
     };
 }
