@@ -17,6 +17,7 @@ extern "C" int yylineno;
 #include <minilang/mscope.h>
 #include <minilang/mglobal.h>
 #include <minilang/mvariable.h>
+#include <minilang/mtype.h>
 #include <vector>
 }
 
@@ -26,14 +27,11 @@ extern "C" int yylineno;
 	std::vector<mini::MStatement*>*  m_statements;
 	std::vector<mini::MVariable*>*   m_variables;
 	mini::MVariable*                 m_variable;
+	mini::TYPE                       m_type;
 }
 
 // Define tokens
 %token
-    T_TYPE_FLOAT    "float type"
-    T_TYPE_INT      "int type"
-    T_TYPE_STRING   "string type"
-    T_TYPE_BOOLEAN  "boolean type"
     T_VAR           "var"
     T_WHILE         "while"
     T_IF            "if"
@@ -62,6 +60,10 @@ extern "C" int yylineno;
     <m_expression>  T_IDENTIFIER   "identifier"
     <m_expression>  T_TRUE         "TRUE"
     <m_expression>  T_FALSE        "FALSE"
+    <m_type>        T_TYPE_FLOAT   "float type"
+    <m_type>        T_TYPE_INT     "int type"
+    <m_type>        T_TYPE_STRING  "string type"
+    <m_type>        T_TYPE_BOOLEAN "boolean type"
     ;
 
 // Non-terminal type
@@ -71,6 +73,7 @@ extern "C" int yylineno;
 %type <m_statement>     ELSE_OPT
 %type <m_variable>      VAR_DEC
 %type <m_variables>     VAR_DECS
+%type <m_type>          TYPE
 
 // Configure bison
 %locations
@@ -107,10 +110,12 @@ VAR_DECS[root]
     ;
 
 VAR_DEC[root]
-    : T_VAR T_IDENTIFIER[id] T_COLON TYPE T_EQUAL EXPR[expr] T_SEMICOLON {
+    : T_VAR T_IDENTIFIER[id] T_COLON TYPE[type] T_EQUAL EXPR[expr] T_SEMICOLON {
         mini::MIdentifier* value = static_cast<mini::MIdentifier*>($id);
         value->setExpression($expr);
-        $root = new mini::MVariable(value);
+        mini::MVariable* variable = new mini::MVariable(value);
+        variable->setType($type);
+        $root = variable;
     }
     ;
 
@@ -207,10 +212,10 @@ EXPR[root]
     | T_FALSE
     ;
 
-TYPE
-    : T_TYPE_INT
-    | T_TYPE_FLOAT
-    | T_TYPE_STRING
-    | T_TYPE_BOOLEAN
+TYPE[root]
+    : T_TYPE_INT        {$root = $1;}
+    | T_TYPE_FLOAT      {$root = $1;}
+    | T_TYPE_STRING     {$root = $1;}
+    | T_TYPE_BOOLEAN    {$root = $1;}
     ;
 %%

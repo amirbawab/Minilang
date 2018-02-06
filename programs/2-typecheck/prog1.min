@@ -1,6 +1,7 @@
+var a:int=1;
 while 2 {
     while 3 {
-        if 1{}
+        if 1{a=1;if(1){}}
         if 1{}
         if 1{} else {}
     }

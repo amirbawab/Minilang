@@ -18,6 +18,12 @@ namespace mini {
         MVariable(mini::MIdentifier* identifier) : m_identifier(identifier){}
 
         /**
+         * Set type
+         * @param type
+         */
+        void setType(mini::TYPE type) {m_type = type;}
+
+        /**
          * Get varibale type
          * @return enum
          */

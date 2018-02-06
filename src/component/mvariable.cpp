@@ -4,10 +4,10 @@
 
 std::string mini::MVariable::prettify(int indent) {
     std::stringstream ss;
-    ss << mini::utils::indent(indent);
+    ss << mini::utils::indent(indent) << "var " << m_identifier->getName() << " : ";
     switch (m_type) {
         case mini::TYPE::STRING:
-            ss << "char*";
+            ss << "string";
             break;
         case mini::TYPE::INTEGER:
             ss << "int";
@@ -16,11 +16,11 @@ std::string mini::MVariable::prettify(int indent) {
             ss << "float";
             break;
         case mini::TYPE::BOOLEAN:
-            ss << "bool";
+            ss << "boolean";
             break;
         default:
             throw std::runtime_error("Cannot generate code for a variable with an undefined type");
     }
-    ss << " " << m_identifier->getName() << " = " << m_identifier->getExpression()->prettify() << ";";
+    ss << " = " << m_identifier->getExpression()->prettify() << ";";
     return ss.str();
 }

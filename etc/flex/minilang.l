@@ -19,10 +19,6 @@ extern "C" bool m_tokenFlag;
 
 %%
 var     {if(m_tokenFlag) std::cout << "T_VAR" << std::endl; return T_VAR;}
-float   {if(m_tokenFlag) std::cout << "T_TYPE_FLOAT" << std::endl; return T_TYPE_FLOAT;}
-int     {if(m_tokenFlag) std::cout << "T_TYPE_INT" << std::endl; return T_TYPE_INT;}
-string  {if(m_tokenFlag) std::cout << "T_TYPE_STRING" << std::endl; return T_TYPE_STRING;}
-boolean {if(m_tokenFlag) std::cout << "T_BOOLEAN" << std::endl; return T_TYPE_BOOLEAN;}
 while   {if(m_tokenFlag) std::cout << "T_WHILE" << std::endl; return T_WHILE;}
 if      {if(m_tokenFlag) std::cout << "T_IF" << std::endl; return T_IF;}
 else    {if(m_tokenFlag) std::cout << "T_ELSE" << std::endl; return T_ELSE;}
@@ -44,6 +40,30 @@ read    {if(m_tokenFlag) std::cout << "T_READ" << std::endl; return T_READ;}
 "("     {if(m_tokenFlag) std::cout << "T_LPAR" << std::endl; return T_LPAR;}
 ")"     {if(m_tokenFlag) std::cout << "T_RPAR" << std::endl; return T_RPAR;}
 "!"     {if(m_tokenFlag) std::cout << "T_NOT" << std::endl; return T_NOT;}
+
+float {
+    if(m_tokenFlag) std::cout << "T_TYPE_FLOAT" << std::endl;
+    yylval.m_type = mini::TYPE::FLOAT;
+    return T_TYPE_FLOAT;
+}
+
+int {
+    if(m_tokenFlag) std::cout << "T_TYPE_INT" << std::endl;
+    yylval.m_type = mini::TYPE::INTEGER;
+    return T_TYPE_INT;
+}
+
+string {
+    if(m_tokenFlag) std::cout << "T_TYPE_STRING" << std::endl;
+    yylval.m_type = mini::TYPE::STRING;
+    return T_TYPE_STRING;
+}
+
+boolean {
+    if(m_tokenFlag) std::cout << "T_BOOLEAN" << std::endl;
+    yylval.m_type = mini::TYPE::BOOLEAN;
+    return T_TYPE_BOOLEAN;
+}
 
 TRUE {
     if(m_tokenFlag) std::cout << "T_TRUE" << std::endl;
