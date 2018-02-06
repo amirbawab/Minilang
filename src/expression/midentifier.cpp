@@ -4,6 +4,7 @@
 #include <minilang/mvariable.h>
 #include <minilang/mglobal.h>
 #include <sstream>
+#include <iostream>
 
 mini::TYPE mini::MIdentifier::evalType() {
     linkVariable();
@@ -29,7 +30,9 @@ void mini::MIdentifier::typeCheck() {
 
 void mini::MIdentifier::linkVariable() {
     std::vector<mini::MVariable*> variables = mini::MGlobal::getInstance()->findVariables(m_name);
-    if(variables.size() > 1) {
+
+    // If not variable found
+    if(variables.empty()) {
         mini::error_exit("Identifier " + m_name + " was not declared");
     }
     m_variable = variables.front();
