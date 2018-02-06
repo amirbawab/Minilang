@@ -34,3 +34,9 @@ void mini::MVariable::checkExist() {
         mini::error_exit("Variable " + m_identifier->getName() +" already declared");
     }
 }
+
+void mini::MVariable::typeCheck() {
+    if(m_identifier->getExpression()->evalType() != getType()) {
+        mini::error_exit("Variable " + m_identifier->getName() + " is assigned an unexpected expression type");
+    }
+}

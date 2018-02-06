@@ -34,6 +34,7 @@ void mini::MGlobal::typeCheck() {
     if(m_variables) {
         for(mini::MVariable* variable : *m_variables) {
             variable->checkExist();
+            variable->typeCheck();
         }
     }
     if(m_statements) {
