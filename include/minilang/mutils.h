@@ -13,8 +13,8 @@ namespace mini {
          */
         inline std::string indent(int val) {
             std::stringstream indent;
-            for(size_t i=0; i < val*4; i++) {
-                indent << "    ";
+            for(size_t i=0; i < val; i++) {
+                indent << std::string(4, ' ');
             }
             return indent.str();
         }

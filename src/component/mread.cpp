@@ -1,6 +1,6 @@
 #include <minilang/mread.h>
 #include <minilang/mutils.h>
-#include <sstream>
+#include <iostream>
 
 std::string mini::MRead::prettify(int indent) {
     std::stringstream ss;
@@ -9,11 +9,13 @@ std::string mini::MRead::prettify(int indent) {
 }
 
 void mini::MRead::typeCheck() {
-    m_identifier->typeCheck();
+    m_identifier->evalType();
 }
 
 std::string mini::MRead::toC(int indent) {
     std::stringstream ss;
-    ss << mini::utils::indent(indent) << "scanf (" << m_identifier->getName() << " );";
+    mini::TYPE idType = m_identifier->evalType();
+    ss << mini::utils::indent(indent) << "scanf(\"" << mini::utils::toCStringFormat(idType) << "\", "
+       << m_identifier->getName() << ");";
     return ss.str();
 }

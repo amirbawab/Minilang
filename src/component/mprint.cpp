@@ -1,6 +1,5 @@
 #include <minilang/mprint.h>
 #include <minilang/mutils.h>
-#include <sstream>
 
 std::string mini::MPrint::prettify(int indent) {
     std::stringstream ss;
@@ -10,8 +9,9 @@ std::string mini::MPrint::prettify(int indent) {
 
 std::string mini::MPrint::toC(int indent) {
     std::stringstream ss;
-    // FIXME
-    ss << mini::utils::indent(indent) << "printf (" << m_expression->prettify() << " );";
+    mini::TYPE exprType = m_expression->evalType();
+    ss << mini::utils::indent(indent) << "printf(\"" << mini::utils::toCStringFormat(exprType) << "\", "
+       << m_expression->prettify() << ");";
     return ss.str();
 }
 
