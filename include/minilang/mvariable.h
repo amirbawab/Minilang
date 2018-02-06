@@ -50,5 +50,10 @@ namespace mini {
          * Check type
          */
         void typeCheck();
+
+        /**
+         * Check if type is compatible
+         */
+        void compatibleExpr(mini::MExpression* expression);
     };
 }

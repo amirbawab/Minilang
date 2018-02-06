@@ -36,7 +36,13 @@ void mini::MVariable::checkExist() {
 }
 
 void mini::MVariable::typeCheck() {
-    if(m_identifier->getExpression()->evalType() != getType()) {
+    compatibleExpr(m_identifier->getExpression());
+}
+
+void mini::MVariable::compatibleExpr(mini::MExpression *expression) {
+    mini::TYPE expressionType = expression->evalType();
+    if(expressionType != getType()
+       && !(getType() == mini::TYPE::FLOAT && expressionType == mini::TYPE::INTEGER)) {
         mini::error_exit("Variable " + m_identifier->getName() + " is assigned an unexpected expression type");
     }
 }

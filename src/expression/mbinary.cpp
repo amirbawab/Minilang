@@ -15,7 +15,7 @@ mini::TYPE mini::MBinary::evalType() {
         case B_OR:
             if((leftType != TYPE::BOOLEAN && leftType != TYPE::INTEGER)
                || (rightType != TYPE::BOOLEAN && rightType != TYPE::INTEGER)) {
-                mini::error_exit(getOperator() + " operator expects operands to be boolean");
+                mini::error_exit(getOperator() + " operator expects operands to be boolean or integers");
             }
             return mini::TYPE::BOOLEAN;
 

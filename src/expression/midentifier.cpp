@@ -23,9 +23,7 @@ std::string mini::MIdentifier::prettify(int indent) {
 
 void mini::MIdentifier::typeCheck() {
     linkVariable();
-    if(m_variable->getType() != m_expression->evalType()) {
-        mini::error_exit("Identifier " + m_name + " was assigned an unexpected expression type");
-    }
+    m_variable->compatibleExpr(m_expression);
 }
 
 void mini::MIdentifier::linkVariable() {
