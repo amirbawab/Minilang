@@ -26,5 +26,11 @@ namespace mini {
          */
         std::vector<mini::MStatement*>* getStatements() const { return m_statements; }
 
+        /**
+         * Prettify code
+         * @param indent
+         * @return pretty code
+         */
+        virtual std::string prettify(int indent) = 0;
     };
 }

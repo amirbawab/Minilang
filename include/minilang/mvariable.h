@@ -28,5 +28,11 @@ namespace mini {
          * @return identifier
          */
         mini::MIdentifier* getIdentifier() const { return m_identifier; }
+
+        /**
+         * Prettify code
+         * @return prettify code
+         */
+        std::string prettify();
     };
 }

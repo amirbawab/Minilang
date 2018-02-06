@@ -18,5 +18,10 @@ namespace mini {
          * @return identifier pointer
          */
         mini::MIdentifier* getIdentifier() const {return m_identifier;}
+
+        /**
+         * @see mini::MStatement::prettify
+         */
+        std::string prettify(int indent);
     };
 }

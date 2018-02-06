@@ -59,5 +59,10 @@ namespace mini {
          * @see mini::MExpression::prettify
          */
         virtual std::string prettify();
+
+        /**
+         * @see mini::MStatement::prettify
+         */
+        virtual std::string prettify(int indent);
     };
 }

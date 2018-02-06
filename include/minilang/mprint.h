@@ -18,5 +18,10 @@ namespace mini {
          * @return expression pointer
          */
         MExpression* getExpression() const {return m_expression;}
+
+        /**
+         * @see mini::MStatement::prettify
+         */
+        std::string prettify(int indent);
     };
 }

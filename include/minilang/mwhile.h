@@ -19,6 +19,11 @@ namespace mini {
          * @return condition
          */
         mini::MExpression* getCondition() const { return m_condition;}
+
+        /**
+         * @see mini::MScope::prettify
+         */
+        std::string prettify(int indent);
     };
 }
 

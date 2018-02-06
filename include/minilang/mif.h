@@ -32,5 +32,10 @@ namespace mini {
          * @return else statement
          */
         mini::MStatement* getElse() const {return m_else;}
+
+        /**
+         * @see mini::MScope::prettify
+         */
+        std::string prettify(int indent);
     };
 }

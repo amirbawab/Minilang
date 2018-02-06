@@ -36,5 +36,10 @@ namespace mini {
          * @return variables
          */
         std::vector<mini::MVariable*>* getVariables() {return m_variables;}
+
+        /**
+         * @see mini::MScope::prettify
+         */
+        std::string prettify(int indent);
     };
 }
