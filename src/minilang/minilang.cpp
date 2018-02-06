@@ -4,7 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <getopt.h>
-#include <cstdlib>
+#include <minilang/mglobal.h>
 
 // Information for Flex
 extern "C" FILE *yyin;
@@ -142,10 +142,16 @@ int main(int argc, char** argv) {
     }
     yyin = inputFile;
 
+    // Scan/Parse
     if(m_tokenFlag || m_scanFlag) {
         while (yylex()) {}
-    } else if(m_parseFlag) {
+    } else if(m_prettyFlag || m_parseFlag) {
         do { yyparse(); } while (!feof(yyin));
+    }
+
+    // Prettify
+    if(m_prettyFlag) {
+        std::cout << mini::MGlobal::getInstance()->prettify(0) << std::endl;
     }
 
     return CODE_SUCCESS;
