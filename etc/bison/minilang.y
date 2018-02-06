@@ -137,8 +137,10 @@ STATEMENT[root]
         ifStmt->setStatements($statements);
         $root = ifStmt;
     }
-    | T_IDENTIFIER T_EQUAL EXPR[expr] T_SEMICOLON {
-        $root = mini::MStatementFactory::createIdentifier($expr);
+    | T_IDENTIFIER[id] T_EQUAL EXPR[expr] T_SEMICOLON {
+        mini::MIdentifier* value = static_cast<mini::MIdentifier*>($id);
+        value->setExpression($expr);
+        $root = value;
     }
     | T_READ T_IDENTIFIER[id] T_SEMICOLON {
         mini::MIdentifier* value = static_cast<mini::MIdentifier*>($id);

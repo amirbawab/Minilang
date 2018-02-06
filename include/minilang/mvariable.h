@@ -11,9 +11,6 @@ namespace mini {
         // Variable type
         mini::TYPE m_type;
 
-        // Variable name
-        std::string m_name;
-
         // Variable identifier
         mini::MIdentifier* m_identifier = nullptr;
 
@@ -25,12 +22,6 @@ namespace mini {
          * @return enum
          */
         mini::TYPE getType() const { return m_type; }
-
-        /**
-         * Get varibale name
-         * @return string name
-         */
-        std::string getName() const {return m_name;}
 
         /**
          * Get identifier

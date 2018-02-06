@@ -32,13 +32,6 @@ namespace mini {
         static mini::MElse* createElse();
 
         /**
-         * Create identifier
-         * @param expression
-         * @return pointer an identifier
-         */
-        static mini::MIdentifier* createIdentifier(mini::MExpression* expression);
-
-        /**
          * Create print expression
          * @param expression
          * @return pointer to a print statement

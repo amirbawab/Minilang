@@ -1,5 +1,4 @@
 #include <minilang/midentifier.h>
-#include <minilang/mreport.h>
 #include <minilang/mvariable.h>
 #include <iostream>
 
@@ -11,9 +10,6 @@ mini::TYPE mini::MIdentifier::evalType() {
 }
 
 std::string mini::MIdentifier::prettify() {
-    if (!m_variable) {
-        throw std::runtime_error("Cannot get name of an identifier with an undetermined reference variable");
-    }
-    return m_variable->getName();
+    return getName();
 }
 

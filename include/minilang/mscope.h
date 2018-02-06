@@ -25,5 +25,6 @@ namespace mini {
          * @return vector of statements
          */
         std::vector<mini::MStatement*>* getStatements() const { return m_statements; }
+
     };
 }

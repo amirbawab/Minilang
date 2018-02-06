@@ -13,7 +13,12 @@ namespace mini {
 
         // Expression assigned to the identifier
         mini::MExpression* m_expression = nullptr;
+
+        // Identifier name
+        std::string m_name;
+
     public:
+        MIdentifier(std::string name) : m_name(name) {}
 
         /**
          * Get original vairable
@@ -38,6 +43,12 @@ namespace mini {
          * @param expression
          */
         void setExpression(mini::MExpression* expression) {m_expression = expression;}
+
+        /**
+         * Get varibale name
+         * @return string name
+         */
+        std::string getName() const {return m_name;}
 
         /**
          * @see mini::MExpression::evalType

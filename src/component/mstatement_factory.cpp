@@ -12,11 +12,6 @@ mini::MElse* mini::MStatementFactory::createElse() {
     return new mini::MElse();
 }
 
-mini::MIdentifier* mini::MStatementFactory::createIdentifier(mini::MExpression *expression) {
-    mini::MIdentifier* identifier = new mini::MIdentifier();
-    identifier->setExpression(expression);
-}
-
 mini::MPrint* mini::MStatementFactory::createPrint(mini::MExpression *expression) {
     return new mini::MPrint(expression);
 }

@@ -63,7 +63,7 @@ FALSE {
 
 [a-zA-Z_][a-zA-Z0-9_]* {
     if(m_tokenFlag) std::cout << "T_IDENTIFIER(" << yytext << ")" << std::endl;
-    yylval.m_expression = new mini::MIdentifier();
+    yylval.m_expression = new mini::MIdentifier(strdup(yytext));
     return T_IDENTIFIER;
 }
 

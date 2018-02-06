@@ -19,6 +19,10 @@ std::vector<std::string> m_inputFiles;
 bool m_tokenFlag = false;
 bool m_scanFlag = false;
 bool m_parseFlag = false;
+bool m_prettyFlag = false;
+bool m_symbolFlag = false;
+bool m_typecheckFlag = false;
+bool m_codegenFlag = false;
 
 /**
  * Syntax error function
@@ -38,6 +42,10 @@ void printUsage() {
             << "    -s, --scan            Scan input. Exit (1) on error" << std::endl
             << "    -t, --tokens          Print tokens" << std::endl
             << "    -p, --parse           Parse tokens" << std::endl
+            << "    -P, --pretty          Prettify input file" << std::endl
+            << "    -S, --symbol          Print symbol tables" << std::endl
+            << "    -T, --typecheck       Perform type checking" << std::endl
+            << "    -c, --codegen         Generate C code" << std::endl
             << "    -h, --help            Display this help message" << std::endl;
 }
 
@@ -49,13 +57,17 @@ void initParams(int argc, char *argv[]) {
             {"tokens", no_argument, 0, 't'},
             {"scan", no_argument, 0, 's'},
             {"parse", no_argument, 0, 'p'},
+            {"pretty", no_argument, 0, 'P'},
+            {"symbol", no_argument, 0, 'S'},
+            {"typecheck", no_argument, 0, 'T'},
+            {"codegen", no_argument, 0, 'c'},
             {"help", no_argument, 0, 'h'},
             {0, 0, 0, 0}
     };
 
     int optionIndex = 0;
     int c;
-    while ((c = getopt_long(argc, argv, "hspt", longOptions, &optionIndex)) != -1) {
+    while ((c = getopt_long(argc, argv, "hsptPSTc", longOptions, &optionIndex)) != -1) {
         switch (c) {
             case 't':
                 m_tokenFlag = true;
@@ -65,6 +77,18 @@ void initParams(int argc, char *argv[]) {
                 break;
             case 'p':
                 m_parseFlag = true;
+                break;
+            case 'P':
+                m_prettyFlag = true;
+                break;
+            case 'S':
+                m_symbolFlag = true;
+                break;
+            case 'T':
+                m_typecheckFlag = true;
+                break;
+            case 'c':
+                m_codegenFlag = true;
                 break;
             case 'h':
             default:
@@ -79,7 +103,8 @@ void initParams(int argc, char *argv[]) {
  * @return true if all required arguments are set
  */
 bool validArguments() {
-    return !m_inputFiles.empty() && (m_scanFlag || m_parseFlag || m_tokenFlag);
+    return !m_inputFiles.empty() && (m_scanFlag || m_parseFlag || m_tokenFlag
+                                     || m_prettyFlag || m_symbolFlag || m_typecheckFlag || m_codegenFlag);
 }
 
 /**
