@@ -1,12 +1,12 @@
 #include <minilang/mtable.h>
 #include <minilang/mreport.h>
-#include <sstream>
+#include <minilang/mutils.h>
 
 std::string mini::MTable::str() {
     std::stringstream ss;
     ss << "---- Global Scope ----" << std::endl;
     for(auto variableEntry : m_variableMap) {
-        ss << variableEntry.first << " : " << variableEntry.second->getMiniType() << std::endl;
+        ss << variableEntry.first << " : " << mini::utils::toMiniType(variableEntry.second->getType()) << std::endl;
     }
     ss << "----------------------" << std::endl;
     return ss.str();

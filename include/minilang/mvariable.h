@@ -62,16 +62,5 @@ namespace mini {
          */
         void compatibleExpr(mini::MExpression* expression);
 
-        /**
-         * Get type in minilang syntax
-         * @return string
-         */
-        std::string getMiniType();
-
-        /**
-         * Get type in c syntax
-         * @return string
-         */
-        std::string getCType();
     };
 }
