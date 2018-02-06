@@ -13,7 +13,8 @@ mini::TYPE mini::MBinary::evalType() {
     switch (m_kind) {
         case B_AND:
         case B_OR:
-            if(leftType != TYPE::BOOLEAN || rightType != TYPE::BOOLEAN) {
+            if((leftType != TYPE::BOOLEAN && leftType != TYPE::INTEGER)
+               || (rightType != TYPE::BOOLEAN && rightType != TYPE::INTEGER)) {
                 mini::error_exit(getOperator() + " operator expects operands to be boolean");
             }
             return mini::TYPE::BOOLEAN;
@@ -23,7 +24,8 @@ mini::TYPE mini::MBinary::evalType() {
             if(leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::INTEGER) {
                 return mini::TYPE::INTEGER;
             } else if(leftType == mini::TYPE::FLOAT && rightType == mini::TYPE::INTEGER
-                      || leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::FLOAT) {
+                      || leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::FLOAT
+                      || leftType == mini::TYPE::FLOAT && rightType == mini::TYPE::FLOAT) {
                 return mini::TYPE::FLOAT;
             } else {
                 mini::error_exit(getOperator() + " expects operands to be integers or floats");
@@ -33,7 +35,8 @@ mini::TYPE mini::MBinary::evalType() {
             if(leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::INTEGER) {
                 return mini::TYPE::INTEGER;
             } else if(leftType == mini::TYPE::FLOAT && rightType == mini::TYPE::INTEGER
-                      || leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::FLOAT) {
+                      || leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::FLOAT
+                      || leftType == mini::TYPE::FLOAT && rightType == mini::TYPE::FLOAT) {
                 return mini::TYPE::FLOAT;
             } else if(leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::STRING
                       || leftType == mini::TYPE::STRING && rightType == mini::TYPE::INTEGER) {
@@ -46,7 +49,8 @@ mini::TYPE mini::MBinary::evalType() {
             if(leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::INTEGER) {
                 return mini::TYPE::INTEGER;
             } else if(leftType == mini::TYPE::FLOAT && rightType == mini::TYPE::INTEGER
-                      || leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::FLOAT) {
+                      || leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::FLOAT
+                      || leftType == mini::TYPE::FLOAT && rightType == mini::TYPE::FLOAT) {
                 return mini::TYPE::FLOAT;
             } else if(leftType == mini::TYPE::STRING && rightType == mini::TYPE::STRING) {
                 return mini::TYPE::STRING;
