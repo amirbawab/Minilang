@@ -27,6 +27,7 @@ void mini::MIdentifier::typeCheck() {
 }
 
 void mini::MIdentifier::linkVariable() {
+    // FIXME var a : int = b; var b : int = a;
     std::vector<mini::MVariable*> variables = mini::MGlobal::getInstance()->findVariables(m_name);
 
     // If not variable found
