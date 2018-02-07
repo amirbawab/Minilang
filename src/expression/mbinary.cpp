@@ -85,13 +85,16 @@ std::string mini::MBinary::toC() {
 
     // Handle special cases
     if(m_kind == mini::MExpression::KIND::B_TIMES) {
-        if(leftType == mini::TYPE::STRING && rightType == mini::TYPE::INTEGER) {
+        if (leftType == mini::TYPE::STRING && rightType == mini::TYPE::INTEGER) {
             ss << "repeatStr(" << m_left->toC() << ", " << m_right->toC() << ")";
-        } else if(leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::STRING) {
+        } else if (leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::STRING) {
             ss << "repeatStr(" << m_right->toC() << ", " << m_left->toC() << ")";
         } else {
             ss << "( " << m_left->toC() << " " << opt << " " << m_right->toC() << " )";
         }
+    } else if(m_kind == mini::MExpression::KIND::B_PLUS
+              && leftType == mini::TYPE::STRING && rightType == mini::TYPE::STRING) {
+        ss << "cat(" << m_left->toC() << ", " << m_right->toC() << ")";
     } else {
 
         // Default case

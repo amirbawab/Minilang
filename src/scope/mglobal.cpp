@@ -68,8 +68,26 @@ std::string mini::MGlobal::toC(int indent) {
        << mini::utils::indent(indent+1) << "}" << std::endl
        << mini::utils::indent(indent+1) << "*p = '\\0';" << std::endl
        << mini::utils::indent(indent+1) << "return dest;" << std::endl
-       << mini::utils::indent(indent) << "}" << std::endl << std::endl;
+       << mini::utils::indent(indent) << "}" << std::endl
+       << std::endl;
 
+    // String concatenation
+    ss << mini::utils::indent(indent) << "char* cat(char *str1, char *str2) {" << std::endl
+       << mini::utils::indent(indent+1) <<"char* str1Cp = malloc(sizeof(char) * 1024);" << std::endl
+       << mini::utils::indent(indent+1) << "char* ptr = str1Cp;" << std::endl
+       << mini::utils::indent(indent+1) << "strcpy(ptr, str1);" << std::endl
+       << mini::utils::indent(indent+1) << "while(*ptr) {" << std::endl
+       << mini::utils::indent(indent+2) << "ptr++;" << std::endl
+       << mini::utils::indent(indent+1) << "}" << std::endl
+       << mini::utils::indent(indent+1) << "while(*str2) {" << std::endl
+       << mini::utils::indent(indent+2) << "*ptr = *str2;" << std::endl
+       << mini::utils::indent(indent+2) << "str2++;" << std::endl
+       << mini::utils::indent(indent+2) << "ptr++;" << std::endl
+       << mini::utils::indent(indent+1) << "}" << std::endl
+       << mini::utils::indent(indent+1) << "*ptr = '\\0';" << std::endl
+       << mini::utils::indent(indent+1) << "return str1Cp;" << std::endl
+       << mini::utils::indent(indent) << "}" << std::endl
+       << std::endl;
 
     // Main function
     ss << mini::utils::indent(indent) << "int main() {" << std::endl;
