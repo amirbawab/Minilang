@@ -40,16 +40,34 @@ void mini::MGlobal::typeCheck() {
 
 std::string mini::MGlobal::toC(int indent) {
     std::stringstream ss;
-    ss  << "/***********************************" << std::endl
-        << " * THIS PROGRAM IS AUTO GENERATED" << std::endl
-        << " ***********************************/" << std::endl
-        << "#include <stdio.h>" << std::endl
-        << "#include <stdlib.h>" << std::endl
-        << "#include <stdbool.h>" << std::endl
-        << "#include <string.h>" << std::endl
-        << std::endl;
+    ss << "/***********************************" << std::endl
+       << " * THIS PROGRAM IS AUTO GENERATED" << std::endl
+       << " ***********************************/" << std::endl
+       << "#include <stdio.h>" << std::endl
+       << "#include <stdlib.h>" << std::endl
+       << "#include <stdbool.h>" << std::endl
+       << "#include <string.h>" << std::endl
+       << std::endl;
 
-    ss << "int main() {" << std::endl;
+    // Repeat String function
+    ss << mini::utils::indent(indent) << "char* repeatStr(char* str, int times) {" << std::endl
+       << mini::utils::indent(indent+1) << "if (times < 0) {" << std::endl
+       << mini::utils::indent(indent+2) << "fprintf(stderr, \"Repeat value cannot be negative\\n\");" << std::endl
+       << mini::utils::indent(indent+2) << "exit(1);" << std::endl
+       << mini::utils::indent(indent+1) << "}" << std::endl
+       << mini::utils::indent(indent+1) << "size_t slen = strlen(str);" << std::endl
+       << mini::utils::indent(indent+1) << "char* dest = malloc(times * slen + 1);" << std::endl
+       << mini::utils::indent(indent+1) << "int i; char* p;" << std::endl
+       << mini::utils::indent(indent+1) << "for(i=0, p=dest; i < times; ++i, p += slen) {" << std::endl
+       << mini::utils::indent(indent+2) << "memcpy(p, str, slen);" << std::endl
+       << mini::utils::indent(indent+1) << "}" << std::endl
+       << mini::utils::indent(indent+1) << "*p = '\\0';" << std::endl
+       << mini::utils::indent(indent+1) << "return dest;" << std::endl
+       << mini::utils::indent(indent) << "}" << std::endl << std::endl;
+
+
+    // Main function
+    ss << mini::utils::indent(indent) << "int main() {" << std::endl;
     // Declare and initialize variables
     if(m_variables) {
         ss << mini::utils::indent(indent+1) << "// Declare and initialize variables" << std::endl;
@@ -78,7 +96,7 @@ std::string mini::MGlobal::toC(int indent) {
         }
     }
     ss << mini::utils::indent(indent+1) << "return (0);" << std::endl;
-    ss << "}" << std::endl;
+    ss << mini::utils::indent(indent) << "}" << std::endl;
     return ss.str();
 }
 
