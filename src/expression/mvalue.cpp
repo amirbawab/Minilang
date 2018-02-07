@@ -55,6 +55,6 @@ std::string mini::MValue<bool>::prettify() {
     return m_value ? "TRUE" : "FALSE";
 }
 std::string mini::MValue<bool>::toC() {
-    return m_value ? "1" : "0";
+    return m_value ? "true" : "false";
 }
 
