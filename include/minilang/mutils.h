@@ -67,9 +67,9 @@ namespace mini {
         inline std::string toCStringFormat(mini::TYPE type) {
             switch (type) {
                 case mini::TYPE::STRING:
+                case mini::TYPE::BOOLEAN:
                     return "%s";
                 case mini::TYPE::INTEGER:
-                case mini::TYPE::BOOLEAN:
                     return "%d";
                 case mini::TYPE::FLOAT:
                     return "%f";
