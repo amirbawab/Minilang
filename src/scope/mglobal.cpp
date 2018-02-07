@@ -49,6 +49,11 @@ std::string mini::MGlobal::toC(int indent) {
        << "#include <string.h>" << std::endl
        << std::endl;
 
+    // Temp variable
+    ss << "// Temp variables" << std::endl
+       << "int t_tmp1 = 0;" << std::endl
+       << std::endl;
+
     // Repeat String function
     ss << mini::utils::indent(indent) << "char* repeatStr(char* str, int times) {" << std::endl
        << mini::utils::indent(indent+1) << "if (times < 0) {" << std::endl
@@ -90,7 +95,7 @@ std::string mini::MGlobal::toC(int indent) {
     if(m_variables) {
         for(mini::MVariable* variable : *m_variables) {
             if(variable->getType() == mini::TYPE::STRING) {
-                ss << mini::utils::indent(indent+1) << "free( " << variable->getIdentifier()->getName()
+                ss << mini::utils::indent(indent+1) << "free( " << variable->getIdentifier()->getCName()
                    << " );" << std::endl;
             }
         }

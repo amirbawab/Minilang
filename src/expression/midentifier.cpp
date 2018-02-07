@@ -16,7 +16,7 @@ std::string mini::MIdentifier::prettify() {
 }
 
 std::string mini::MIdentifier::toC() {
-    return getName();
+    return getCName();
 }
 
 std::string mini::MIdentifier::prettify(int indent) {
@@ -28,9 +28,9 @@ std::string mini::MIdentifier::prettify(int indent) {
 std::string mini::MIdentifier::toC(int indent) {
     std::stringstream ss;
     if(m_variable->getType() == mini::TYPE::STRING) {
-        ss << mini::utils::indent(indent) << "strcpy(" << getName() << ", " << m_expression->toC() << ");";
+        ss << mini::utils::indent(indent) << "strcpy(" << getCName() << ", " << m_expression->toC() << ");";
     } else {
-        ss << mini::utils::indent(indent) << getName() << " = " << m_expression->toC() << ";";
+        ss << mini::utils::indent(indent) << getCName() << " = " << m_expression->toC() << ";";
     }
     return ss.str();
 }
@@ -48,4 +48,8 @@ void mini::MIdentifier::linkVariable() {
         mini::error_exit("Identifier " + m_name + " was not declared");
     }
     m_variable = variable;
+}
+
+std::string mini::MIdentifier::getCName() {
+    return "v_" + getName();
 }

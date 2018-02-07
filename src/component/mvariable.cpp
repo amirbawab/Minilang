@@ -15,12 +15,12 @@ std::string mini::MVariable::prettify(int indent) {
 std::string mini::MVariable::toC(int indent) {
     std::stringstream ss;
     if (m_type == mini::TYPE::STRING) {
-        ss << mini::utils::indent(indent) << mini::utils::toCType(getType()) << " " << m_identifier->getName()
+        ss << mini::utils::indent(indent) << mini::utils::toCType(getType()) << " " << m_identifier->getCName()
            << " = malloc(sizeof(char) * 1024);" << std::endl;
-        ss << mini::utils::indent(indent) << "strcpy(" << m_identifier->getName()
+        ss << mini::utils::indent(indent) << "strcpy(" << m_identifier->getCName()
            << ", " << m_identifier->getExpression()->toC() << ");";
     } else {
-        ss << mini::utils::indent(indent) << mini::utils::toCType(getType()) << " " << m_identifier->getName()
+        ss << mini::utils::indent(indent) << mini::utils::toCType(getType()) << " " << m_identifier->getCName()
            << " = " << m_identifier->getExpression()->toC() << ";";
     }
     return ss.str();

@@ -51,6 +51,12 @@ namespace mini {
         std::string getName() const {return m_name;}
 
         /**
+         * Get variable name in C
+         * @return string name
+         */
+        std::string getCName();
+
+        /**
          * @see mini::MExpression::evalType
          */
         mini::TYPE evalType();
