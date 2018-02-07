@@ -84,28 +84,34 @@ std::string mini::MGlobal::toC(int indent) {
        << mini::utils::indent(indent) << "}" << std::endl
        << std::endl;
 
+    // Boolean to ascii
+    ss << mini::utils::indent(indent) << "char* btoa(bool val) {" << std::endl
+       << mini::utils::indent(indent+1)   << "if(val) {" << std::endl
+       << mini::utils::indent(indent+2)       << "return \"TRUE\";" << std::endl
+       << mini::utils::indent(indent+1)   << "} else {" << std::endl
+       << mini::utils::indent(indent+2)       << "return \"FALSE\";" << std::endl
+       << mini::utils::indent(indent+1)   << "}" << std::endl
+       << mini::utils::indent(indent)   << "}" << std::endl
+       << std::endl;
+
+    // Ascii to boolean
+    ss << mini::utils::indent(indent)   << "bool atob(char* boolStr) {" << std::endl
+       << mini::utils::indent(indent+1)     << "if(strcmp(boolStr, \"TRUE\") == 0) {" << std::endl
+       << mini::utils::indent(indent+2)         << "return true;" << std::endl
+       << mini::utils::indent(indent+1)     << "} else if(strcmp(boolStr, \"FALSE\") == 0) {" << std::endl
+       << mini::utils::indent(indent+2)         << "return false;" << std::endl
+       << mini::utils::indent(indent+1)     << "} else {" << std::endl
+       << mini::utils::indent(indent+2)         << "fprintf(stderr, \"Value '%s' is not a valid boolean value. Expecting TRUE or FALSE\\n\", boolStr);" << std::endl
+       << mini::utils::indent(indent+2)         << "exit(1);" << std::endl
+       << mini::utils::indent(indent+1)     << "}" << std::endl
+       << mini::utils::indent(indent)   << "}" << std::endl
+       << std::endl;
+
+    // Scan a boolean
     ss << mini::utils::indent(indent) << "void scanb(bool *id) {" << std::endl
        << mini::utils::indent(indent+1) <<    "char* boolStr = malloc(sizeof(char) * 1024);" << std::endl
        << mini::utils::indent(indent+1) <<    "scanf(\"%s\", boolStr);" << std::endl
-       << mini::utils::indent(indent+1) <<    "if(strcmp(boolStr, \"TRUE\") == 0) {" << std::endl
-       << mini::utils::indent(indent+2) <<        "*id = true;" << std::endl
-       << mini::utils::indent(indent+1) <<    "} else if(strcmp(boolStr, \"FALSE\") == 0) {" << std::endl
-       << mini::utils::indent(indent+2) <<        "*id = false;" << std::endl
-       << mini::utils::indent(indent+1) <<    "} else {" << std::endl
-       << mini::utils::indent(indent+2) <<        "fprintf(stderr, \"Value '%s' is not a "
-            "valid boolean value. Expecting TRUE or FALSE\\n\", boolStr);" << std::endl
-       << mini::utils::indent(indent+2) <<        "exit(1);" << std::endl
-       << mini::utils::indent(indent+1) <<    "}" << std::endl
-       << mini::utils::indent(indent) << "}" << std::endl
-       << std::endl;
-
-    // Boolean to ascii
-    ss << mini::utils::indent(indent) << "char* btoa(bool val) {" << std::endl
-       << mini::utils::indent(indent)   << "if(val) {" << std::endl
-       << mini::utils::indent(indent)       << "return \"TRUE\";" << std::endl
-       << mini::utils::indent(indent)   << "} else {" << std::endl
-       << mini::utils::indent(indent)       << "return \"FALSE\";" << std::endl
-       << mini::utils::indent(indent)   << "}" << std::endl
+       << mini::utils::indent(indent+1) <<    "*id = atob(boolStr);" << std::endl
        << mini::utils::indent(indent) << "}" << std::endl
        << std::endl;
 
