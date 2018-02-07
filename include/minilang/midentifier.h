@@ -61,6 +61,11 @@ namespace mini {
         std::string prettify();
 
         /**
+         * @see mini::MExpression::toC
+         */
+        std::string toC();
+
+        /**
          * @see mini::MStatement::prettify
          */
         std::string prettify(int indent);

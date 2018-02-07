@@ -41,3 +41,20 @@ std::string mini::MUnary::prettify() {
     ss << "( " << opt << m_operand->prettify() << " )";
     return ss.str();
 }
+
+std::string mini::MUnary::toC() {
+    std::stringstream ss;
+    std::string opt;
+    switch (m_kind) {
+        case U_MINUS:
+            opt = " - ";
+            break;
+        case U_NOT:
+            opt = " ! ";
+            break;
+        default:
+            throw std::runtime_error("Cannot generate C code for unary expression because kind is unknown");
+    }
+    ss << "( " << opt << m_operand->toC() << " )";
+    return ss.str();
+}

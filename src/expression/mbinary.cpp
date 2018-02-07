@@ -73,22 +73,29 @@ mini::TYPE mini::MBinary::evalType() {
 std::string mini::MBinary::prettify() {
     std::stringstream ss;
     std::string opt = getOperator();
+    ss << "( " << m_left->prettify() << " " << opt << " " << m_right->prettify() << " )";
+    return ss.str();
+}
+
+std::string mini::MBinary::toC() {
+    std::stringstream ss;
+    std::string opt = getOperator();
     mini::TYPE leftType = m_left->evalType();
     mini::TYPE rightType = m_right->evalType();
 
     // Handle special cases
     if(m_kind == mini::MExpression::KIND::B_TIMES) {
         if(leftType == mini::TYPE::STRING && rightType == mini::TYPE::INTEGER) {
-            ss << "repeatStr(" << m_left->prettify() << ", " << m_right->prettify() << ")";
+            ss << "repeatStr(" << m_left->toC() << ", " << m_right->toC() << ")";
         } else if(leftType == mini::TYPE::INTEGER && rightType == mini::TYPE::STRING) {
-            ss << "repeatStr(" << m_right->prettify() << ", " << m_left->prettify() << ")";
+            ss << "repeatStr(" << m_right->toC() << ", " << m_left->toC() << ")";
         } else {
-            ss << "( " << m_left->prettify() << " " << opt << " " << m_right->prettify() << " )";
+            ss << "( " << m_left->toC() << " " << opt << " " << m_right->toC() << " )";
         }
     } else {
 
         // Default case
-        ss << "( " << m_left->prettify() << " " << opt << " " << m_right->prettify() << " )";
+        ss << "( " << m_left->toC() << " " << opt << " " << m_right->toC() << " )";
     }
     return ss.str();
 }

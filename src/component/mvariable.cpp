@@ -18,10 +18,10 @@ std::string mini::MVariable::toC(int indent) {
         ss << mini::utils::indent(indent) << mini::utils::toCType(getType()) << " " << m_identifier->getName()
            << " = malloc(sizeof(char) * 1024);" << std::endl;
         ss << mini::utils::indent(indent) << "strcpy(" << m_identifier->getName()
-           << ", " << m_identifier->getExpression()->prettify() << ");";
+           << ", " << m_identifier->getExpression()->toC() << ");";
     } else {
         ss << mini::utils::indent(indent) << mini::utils::toCType(getType()) << " " << m_identifier->getName()
-           << " = " << m_identifier->getExpression()->prettify() << ";";
+           << " = " << m_identifier->getExpression()->toC() << ";";
     }
     return ss.str();
 }

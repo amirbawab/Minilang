@@ -50,6 +50,11 @@ namespace mini {
         virtual std::string prettify();
 
         /**
+         * @see mini::MExpression::prettify
+         */
+        virtual std::string toC();
+
+        /**
          * Get operator of the binary operation
          * @return string
          */

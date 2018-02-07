@@ -11,8 +11,9 @@ namespace mini {
     public:
         int m_value;
         MValue(int value) : m_value(value){ m_kind = mini::MExpression::KIND::VALUE; }
-        virtual mini::TYPE evalType();
-        virtual std::string prettify();
+        mini::TYPE evalType();
+        std::string prettify();
+        std::string toC();
     };
 
     template <>
@@ -20,8 +21,9 @@ namespace mini {
     public:
         bool m_value;
         MValue(bool value) : m_value(value){m_kind = mini::MExpression::KIND::VALUE;}
-        virtual mini::TYPE evalType();
-        virtual std::string prettify();
+        mini::TYPE evalType();
+        std::string prettify();
+        std::string toC();
     };
 
     template <>
@@ -29,8 +31,9 @@ namespace mini {
     public:
         char* m_value;
         MValue(char* value) : m_value(value){m_kind = mini::MExpression::KIND::VALUE;}
-        virtual mini::TYPE evalType();
-        virtual std::string prettify();
+        mini::TYPE evalType();
+        std::string prettify();
+        std::string toC();
     };
 
     template <>
@@ -38,7 +41,8 @@ namespace mini {
     public:
         float m_value;
         MValue(float value) : m_value(value){m_kind = mini::MExpression::KIND::VALUE;}
-        virtual mini::TYPE evalType();
-        virtual std::string prettify();
+        mini::TYPE evalType();
+        std::string prettify();
+        std::string toC();
     };
 }

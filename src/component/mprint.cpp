@@ -11,7 +11,7 @@ std::string mini::MPrint::toC(int indent) {
     std::stringstream ss;
     mini::TYPE exprType = m_expression->evalType();
     ss << mini::utils::indent(indent) << "printf(\"" << mini::utils::toCStringFormat(exprType) << "\\n\", "
-       << m_expression->prettify() << ");";
+       << m_expression->toC() << ");";
     return ss.str();
 }
 

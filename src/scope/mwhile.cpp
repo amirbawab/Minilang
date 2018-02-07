@@ -32,7 +32,7 @@ void mini::MWhile::typeCheck() {
 
 std::string mini::MWhile::toC(int indent) {
     std::stringstream ss;
-    ss << mini::utils::indent(indent) << "while ( " << m_condition->prettify() << " ) {";
+    ss << mini::utils::indent(indent) << "while ( " << m_condition->toC() << " ) {";
     if(m_statements) {
         ss << std::endl;
         for(mini::MStatement* statement : *m_statements) {

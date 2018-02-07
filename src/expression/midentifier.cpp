@@ -15,6 +15,10 @@ std::string mini::MIdentifier::prettify() {
     return getName();
 }
 
+std::string mini::MIdentifier::toC() {
+    return getName();
+}
+
 std::string mini::MIdentifier::prettify(int indent) {
     std::stringstream ss;
     ss << mini::utils::indent(indent) << getName() << " = " << m_expression->prettify() << ";";
@@ -24,9 +28,9 @@ std::string mini::MIdentifier::prettify(int indent) {
 std::string mini::MIdentifier::toC(int indent) {
     std::stringstream ss;
     if(m_variable->getType() == mini::TYPE::STRING) {
-        ss << mini::utils::indent(indent) << "strcpy(" << getName() << ", " << m_expression->prettify() << ");";
+        ss << mini::utils::indent(indent) << "strcpy(" << getName() << ", " << m_expression->toC() << ");";
     } else {
-        ss << mini::utils::indent(indent) << getName() << " = " << m_expression->prettify() << ";";
+        ss << mini::utils::indent(indent) << getName() << " = " << m_expression->toC() << ";";
     }
     return ss.str();
 }

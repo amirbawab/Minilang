@@ -46,6 +46,12 @@ namespace mini {
          */
         virtual std::string prettify()=0;
 
+        /**
+         * Generate C code
+         * @return c code
+         */
+        virtual std::string toC()=0;
+
         protected:
             // Kind of the expression
             KIND m_kind = KIND::UNDEFINED;

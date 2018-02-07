@@ -28,8 +28,12 @@ namespace mini {
 
         /**
          * @see mini::MExpression::prettify
-         * @return
          */
         virtual std::string prettify();
+
+        /**
+         * @see mini::MExpression::prettify
+         */
+        virtual std::string toC();
     };
 }
