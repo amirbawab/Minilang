@@ -23,7 +23,11 @@ std::string mini::MIdentifier::prettify(int indent) {
 
 std::string mini::MIdentifier::toC(int indent) {
     std::stringstream ss;
-    ss << mini::utils::indent(indent) << getName() << " = " << m_expression->prettify() << ";";
+    if(m_variable->getType() == mini::TYPE::STRING) {
+        ss << mini::utils::indent(indent) << "strcpy(" << getName() << ", " << m_expression->prettify() << ");";
+    } else {
+        ss << mini::utils::indent(indent) << getName() << " = " << m_expression->prettify() << ";";
+    }
     return ss.str();
 }
 
