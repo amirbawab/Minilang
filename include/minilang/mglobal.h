@@ -16,6 +16,8 @@ namespace mini {
         // Symbol table
         mini::MTable m_table;
     public:
+        ~MGlobal();
+
         /**
          * Get single instance of this class
          * @return pointer to a singleton instance

@@ -152,3 +152,12 @@ std::string mini::MGlobal::toC(int indent) {
 std::string mini::MGlobal::toSymbolTable() {
     return m_table.str();
 }
+
+mini::MGlobal::~MGlobal() {
+    if(m_variables) {
+        for(mini::MVariable* variable : *m_variables) {
+            delete variable;
+        }
+        delete m_variables;
+    }
+}

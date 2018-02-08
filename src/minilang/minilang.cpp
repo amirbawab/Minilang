@@ -173,5 +173,10 @@ int main(int argc, char** argv) {
         std::cout << mini::MGlobal::getInstance()->toC(0) << std::endl;
     }
 
+    // Delete global function
+    if(mini::MGlobal::getInstance()) {
+        delete mini::MGlobal::getInstance();
+    }
+
     return CODE_SUCCESS;
 }
