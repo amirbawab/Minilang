@@ -1,2 +1,4 @@
 var a : string = FALSE;
-print a * 2;
+var b : boolean = "FALSE";
+var c : int = 321;
+print a * (1 / 0);

@@ -17,8 +17,11 @@ namespace mini {
         // Identifier name
         std::string m_name;
 
+        // Line number
+        int m_line;
+
     public:
-        MIdentifier(std::string name) : m_name(name) {}
+        MIdentifier(std::string name, int line) : m_name(name), m_line(line) {}
 
         /**
          * Get original vairable
@@ -90,5 +93,11 @@ namespace mini {
          * Link to referece variable
          */
         void linkVariable();
+
+        /**
+         * Get line number
+         * @return line number
+         */
+        int getLine() { return m_line; }
     };
 }

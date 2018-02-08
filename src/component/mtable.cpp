@@ -21,7 +21,8 @@ mini::MVariable* mini::MTable::getVariable(std::string name) {
 
 void mini::MTable::registerVariable(mini::MVariable *variable) {
     if(getVariable(variable->getIdentifier()->getName())) {
-        mini::error_exit("Multiple declaration of variable " + variable->getIdentifier()->getName());
+        mini::report::error_exit("Multiple declaration of variable " + variable->getIdentifier()->getName(),
+                                 variable->getIdentifier()->getLine());
     }
     m_variableMap[variable->getIdentifier()->getName()] = variable;
 }

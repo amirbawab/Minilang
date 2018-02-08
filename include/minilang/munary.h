@@ -35,5 +35,10 @@ namespace mini {
          * @see mini::MExpression::prettify
          */
         virtual std::string toC();
+
+        /**
+         * @see mini::MExpression::getLine
+         */
+        int getLine();
     };
 }

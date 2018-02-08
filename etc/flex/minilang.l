@@ -67,13 +67,13 @@ boolean {
 
 TRUE {
     if(m_tokenFlag) std::cout << "T_TRUE" << std::endl;
-    yylval.m_expression = new mini::MValue<bool>(true);
+    yylval.m_expression = new mini::MValue<bool>(true, yylineno);
     return T_TRUE;
 }
 
 FALSE {
     if(m_tokenFlag) std::cout << "T_FALSE" << std::endl;
-    yylval.m_expression = new mini::MValue<bool>(false);
+    yylval.m_expression = new mini::MValue<bool>(false, yylineno);
     return T_FALSE;
 }
 
@@ -83,25 +83,25 @@ FALSE {
 
 [a-zA-Z_][a-zA-Z0-9_]* {
     if(m_tokenFlag) std::cout << "T_IDENTIFIER(" << yytext << ")" << std::endl;
-    yylval.m_expression = new mini::MIdentifier(strdup(yytext));
+    yylval.m_expression = new mini::MIdentifier(strdup(yytext), yylineno);
     return T_IDENTIFIER;
 }
 
 (0|[1-9][0-9]*)\.[0-9]+ {
     if(m_tokenFlag) std::cout << "T_FLOAT(" << yytext << ")" << std::endl;
-    yylval.m_expression = new mini::MValue<float>(atof(yytext));
+    yylval.m_expression = new mini::MValue<float>(atof(yytext), yylineno);
     return T_FLOAT;
 }
 
 0|([1-9][0-9]*) {
     if(m_tokenFlag) std::cout << "T_INTEGER(" << yytext << ")" << std::endl;
-    yylval.m_expression = new mini::MValue<int>(atoi(yytext));
+    yylval.m_expression = new mini::MValue<int>(atoi(yytext), yylineno);
     return T_INTEGER;
 }
 
 \"((\\[abfnrtv\"\\])|[ a-zA-Z0-9\~\@\#\$\%\^\&\*\-\+\/\`\<\>\=\_\|\'\.\,\;\:\!\?\{\}\[\]\(\)])*\"  {
     if(m_tokenFlag) std::cout << "T_STRING(" << yytext << ")" << std::endl;
-    yylval.m_expression = new mini::MValue<char*>(strdup(yytext));
+    yylval.m_expression = new mini::MValue<char*>(strdup(yytext), yylineno);
     return T_STRING;
 }
 

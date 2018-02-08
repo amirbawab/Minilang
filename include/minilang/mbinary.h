@@ -59,5 +59,10 @@ namespace mini {
          * @return string
          */
         std::string getOperator();
+
+        /**
+         * @see mini::MExpression::getLine
+         */
+        int getLine();
     };
 }

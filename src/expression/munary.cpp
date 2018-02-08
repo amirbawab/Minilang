@@ -11,13 +11,13 @@ mini::TYPE mini::MUnary::evalType() {
     switch (m_kind) {
         case U_MINUS:
             if(operandType != mini::TYPE::INTEGER && operandType != mini::TYPE::FLOAT) {
-                mini::error_exit("unary operator - expects the operand to be an integer or float");
+                mini::report::error_exit("unary operator - expects the operand to be an integer or float", getLine());
             }
             return operandType;
 
         case U_NOT:
             if(operandType != mini::TYPE::BOOLEAN) {
-                mini::error_exit("unary operator ! expects the operand to be a boolean");
+                mini::report::error_exit("unary operator ! expects the operand to be a boolean", getLine());
             }
             return mini::TYPE::BOOLEAN;
         default:
@@ -57,4 +57,8 @@ std::string mini::MUnary::toC() {
     }
     ss << "( " << opt << m_operand->toC() << " )";
     return ss.str();
+}
+
+int mini::MUnary::getLine() {
+    return m_operand->getLine();
 }

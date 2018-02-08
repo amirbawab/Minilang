@@ -45,7 +45,7 @@ void mini::MIdentifier::linkVariable() {
 
     // If not variable found
     if(!variable) {
-        mini::error_exit("Identifier " + m_name + " was not declared");
+        mini::report::error_exit("Identifier " + m_name + " was not declared", getLine());
     }
     m_variable = variable;
 }

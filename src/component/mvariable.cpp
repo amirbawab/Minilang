@@ -37,7 +37,7 @@ std::string mini::MVariable::toC(int indent) {
 void mini::MVariable::checkExist() {
     mini::MVariable* variable = mini::MGlobal::getInstance()->findVariable(m_identifier->getName());
     if(variable) {
-        mini::error_exit("Variable " + m_identifier->getName() +" already declared");
+        mini::report::error_exit("Variable " + m_identifier->getName() +" already declared", m_identifier->getLine());
     }
 }
 
@@ -51,6 +51,7 @@ void mini::MVariable::compatibleExpr(mini::MExpression *expression) {
        && !(getType() == mini::TYPE::FLOAT && expressionType == mini::TYPE::INTEGER)
        && !(getType() == mini::TYPE::BOOLEAN && expressionType == mini::TYPE::STRING)
        && !(getType() == mini::TYPE::STRING) && expressionType == mini::TYPE::BOOLEAN) {
-        mini::error_exit("Variable " + m_identifier->getName() + " is assigned an unexpected expression type");
+        mini::report::error_exit("Variable " + m_identifier->getName() + " is assigned an unexpected expression type",
+                                 m_identifier->getLine());
     }
 }

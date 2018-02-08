@@ -25,7 +25,7 @@ std::string mini::MIf::prettify(int indent) {
 void mini::MIf::typeCheck() {
     mini::TYPE conditionType = m_condition->evalType();
     if(conditionType != mini::TYPE::BOOLEAN && conditionType != mini::TYPE::INTEGER) {
-        mini::error_exit("While condition must evaluate to boolean or integer");
+        mini::report::error_exit("While condition must evaluate to boolean or integer", m_condition->getLine());
     }
 
     if(m_statements) {

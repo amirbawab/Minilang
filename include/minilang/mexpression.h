@@ -52,6 +52,12 @@ namespace mini {
          */
         virtual std::string toC()=0;
 
+        /**
+         * Get line number
+         * @return line number
+         */
+        virtual int getLine() = 0;
+
         protected:
             // Kind of the expression
             KIND m_kind = KIND::UNDEFINED;
