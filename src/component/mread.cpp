@@ -24,3 +24,9 @@ std::string mini::MRead::toC(int indent) {
     }
     return ss.str();
 }
+
+mini::MRead::~MRead() {
+    if(m_identifier) {
+        delete m_identifier;
+    }
+}

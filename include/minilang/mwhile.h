@@ -14,6 +14,8 @@ namespace mini {
     public:
         MWhile(mini::MExpression* condition) : m_condition(condition){}
 
+        ~MWhile();
+
         /**
          * Get if statement condition
          * @return condition

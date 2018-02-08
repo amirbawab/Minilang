@@ -15,6 +15,8 @@ namespace mini {
     public:
         MIf(mini::MExpression* condition) : m_condition(condition){}
 
+        ~MIf();
+
         /**
          * Get if statement condition
          * @return condition

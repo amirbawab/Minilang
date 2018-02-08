@@ -13,6 +13,8 @@ namespace mini {
     public:
         MRead(mini::MIdentifier* identifier) : m_identifier(identifier){}
 
+        ~MRead();
+
         /**
          * Get identifier
          * @return identifier pointer

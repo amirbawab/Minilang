@@ -1,7 +1,6 @@
 #include <minilang/mwhile.h>
 #include <minilang/mutils.h>
 #include <minilang/mreport.h>
-#include <sstream>
 
 std::string mini::MWhile::prettify(int indent) {
     std::stringstream ss;
@@ -42,4 +41,10 @@ std::string mini::MWhile::toC(int indent) {
     }
     ss << "}";
     return ss.str();
+}
+
+mini::MWhile::~MWhile() {
+    if(m_condition) {
+        delete m_condition;
+    }
 }

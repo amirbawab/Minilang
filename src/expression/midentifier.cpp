@@ -53,3 +53,9 @@ void mini::MIdentifier::linkVariable() {
 std::string mini::MIdentifier::getCName() {
     return "v_" + getName();
 }
+
+mini::MIdentifier::~MIdentifier() {
+    if(m_expression) {
+        delete m_expression;
+    }
+}

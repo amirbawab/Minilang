@@ -62,3 +62,9 @@ std::string mini::MUnary::toC() {
 int mini::MUnary::getLine() {
     return m_operand->getLine();
 }
+
+mini::MUnary::~MUnary() {
+    if(m_operand) {
+        delete m_operand;
+    }
+}

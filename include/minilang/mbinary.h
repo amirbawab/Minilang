@@ -15,6 +15,8 @@ namespace mini {
 
     public:
 
+        ~MBinary();
+
         /**
          * @see mini::MExpression::evalType
          */

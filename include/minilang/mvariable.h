@@ -17,6 +17,8 @@ namespace mini {
     public:
         MVariable(mini::MIdentifier* identifier) : m_identifier(identifier){}
 
+        ~MVariable();
+
         /**
          * Set type
          * @param type

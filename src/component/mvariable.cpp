@@ -55,3 +55,9 @@ void mini::MVariable::compatibleExpr(mini::MExpression *expression) {
                                  m_identifier->getLine());
     }
 }
+
+mini::MVariable::~MVariable() {
+    if(m_identifier) {
+        delete m_identifier;
+    }
+}

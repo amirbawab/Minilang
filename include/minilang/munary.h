@@ -14,6 +14,8 @@ namespace mini {
         std::string m_operator;
 
     public:
+        ~MUnary();
+
         /**
          * @see mini::MExpression::evalType
          */

@@ -131,3 +131,12 @@ std::string mini::MBinary::getOperator() {
 int mini::MBinary::getLine() {
     return m_left->getLine();
 }
+
+mini::MBinary::~MBinary() {
+    if(m_left) {
+        delete m_left;
+    }
+    if(m_right) {
+        delete m_right;
+    }
+}

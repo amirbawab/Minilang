@@ -13,6 +13,8 @@ namespace mini {
     public:
         MPrint(mini::MExpression* expression) : m_expression(expression){}
 
+        ~MPrint();
+
         /**
          * Get print expression
          * @return expression pointer

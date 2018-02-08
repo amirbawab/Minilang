@@ -53,3 +53,9 @@ std::string mini::MIf::toC(int indent) {
     }
     return ss.str();
 }
+
+mini::MIf::~MIf() {
+    if(m_condition) {
+        delete m_condition;
+    }
+}

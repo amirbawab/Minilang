@@ -23,3 +23,9 @@ std::string mini::MPrint::toC(int indent) {
 void mini::MPrint::typeCheck() {
     m_expression->evalType();
 }
+
+mini::MPrint::~MPrint() {
+    if(m_expression) {
+        delete m_expression;
+    }
+}

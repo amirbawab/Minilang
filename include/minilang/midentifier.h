@@ -23,6 +23,8 @@ namespace mini {
     public:
         MIdentifier(std::string name, int line) : m_name(name), m_line(line) {}
 
+        ~MIdentifier();
+
         /**
          * Get original vairable
          * @return
