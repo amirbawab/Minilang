@@ -24,6 +24,9 @@ bool m_symbolFlag = false;
 bool m_typecheckFlag = false;
 bool m_codegenFlag = false;
 
+// Input file
+std::string e_fileName;
+
 /**
  * Syntax error function
  */
@@ -135,6 +138,7 @@ int main(int argc, char** argv) {
 
     // Read file
     std::string inputFileName = m_inputFiles[0];
+    e_fileName = inputFileName.substr(inputFileName.find_last_of("/\\") + 1);
     FILE *inputFile = fopen(inputFileName.c_str(), "r");
     if (!inputFile) {
         std::cerr << "Cannot open input file: " << inputFileName << std::endl;
