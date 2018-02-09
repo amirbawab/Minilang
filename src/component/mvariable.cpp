@@ -47,12 +47,12 @@ void mini::MVariable::typeCheck() {
 
 void mini::MVariable::compatibleExpr(mini::MExpression *expression) {
     mini::TYPE expressionType = expression->evalType();
-    if(expressionType != getType()
+    if(getType() != expressionType
        && !(getType() == mini::TYPE::FLOAT && expressionType == mini::TYPE::INTEGER)
        && !(getType() == mini::TYPE::BOOLEAN && expressionType == mini::TYPE::STRING)
-       && !(getType() == mini::TYPE::STRING) && expressionType == mini::TYPE::BOOLEAN) {
-        mini::report::error_exit("Variable " + m_identifier->getName() + " is assigned an unexpected expression type",
-                                 m_identifier->getLine());
+       && !(getType() == mini::TYPE::STRING && expressionType == mini::TYPE::BOOLEAN)) {
+        mini::report::error_exit("Variable '" + m_identifier->getName() + "' is assigned an unexpected expression type",
+                                 expression->getLine());
     }
 }
 
