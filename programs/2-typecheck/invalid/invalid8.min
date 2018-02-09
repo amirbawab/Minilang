@@ -1,0 +1,2 @@
+// Wrong usage of *
+print "error" * 1.4;

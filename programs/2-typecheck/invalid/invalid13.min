@@ -1,0 +1,3 @@
+// Wrong assignment
+var a : int = 123;
+a = 1;

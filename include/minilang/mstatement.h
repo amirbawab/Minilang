@@ -5,6 +5,7 @@
 namespace mini {
     class MStatement {
     public:
+        virtual ~MStatement(){}
 
         /**
          * Prettify statement code

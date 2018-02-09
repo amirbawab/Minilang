@@ -10,7 +10,7 @@ namespace mini {
         // While loop statements
         std::vector<mini::MStatement*>* m_statements = nullptr;
     public:
-        ~MScope();
+        virtual ~MScope();
 
         /**
          * Set statement to this scope

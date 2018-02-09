@@ -6,6 +6,8 @@
 namespace mini {
     class MExpression {
     public:
+        virtual ~MExpression(){}
+
         /**
          * Specify the kind of the expression
          */

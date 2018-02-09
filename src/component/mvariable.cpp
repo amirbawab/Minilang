@@ -37,7 +37,7 @@ std::string mini::MVariable::toC(int indent) {
 void mini::MVariable::checkExist() {
     mini::MVariable* variable = mini::MGlobal::getInstance()->findVariable(m_identifier->getName());
     if(variable) {
-        mini::report::error_exit("Variable " + m_identifier->getName() +" already declared", m_identifier->getLine());
+        mini::report::error_exit("Variable '" + m_identifier->getName() +"' already declared", variable->getIdentifier()->getLine());
     }
 }
 

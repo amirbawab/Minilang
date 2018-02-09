@@ -1,0 +1,2 @@
+// Invalid usage of -
+print "error" - 1;

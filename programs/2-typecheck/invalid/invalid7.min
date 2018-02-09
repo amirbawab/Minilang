@@ -1,0 +1,2 @@
+// Wrong usage of *
+print 1 * TRUE;

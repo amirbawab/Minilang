@@ -1,0 +1,3 @@
+// Undeclared variable b
+var a : int = 0;
+b = 5;

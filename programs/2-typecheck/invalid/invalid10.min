@@ -1,0 +1,2 @@
+// Wrong usage of while
+while 1.2 {}

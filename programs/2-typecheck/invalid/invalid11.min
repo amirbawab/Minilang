@@ -1,0 +1,2 @@
+// Wrong usage of if
+if 1.2 {}

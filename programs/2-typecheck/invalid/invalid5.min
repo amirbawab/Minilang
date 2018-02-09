@@ -1,0 +1,2 @@
+// Wrong usage of -
+print TRUE - 1;
