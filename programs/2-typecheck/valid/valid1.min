@@ -1,0 +1,8 @@
+// Strings
+var a : string = "works";
+var b : string = FALSE;
+var c : string = TRUE;
+var d : string = "a" + "b";
+var e : string = "a" * 123;
+var f : string = 123 * "a";
+var g : string = a;

@@ -1,0 +1,9 @@
+// Ints
+var a : int = 1;
+var b : int = 1 + 1;
+var c : int = 1 - 1;
+var d : int = 1 * 1;
+var e : int = 1 / 1;
+var f : int = -1;
+var g : int = a;
+

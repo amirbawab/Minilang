@@ -29,7 +29,7 @@ fi
 EXIT_CODE="$?"
 
 # Scan option
-if [[ "$1" == "scan" || "$1" == "parse" ]]; then
+if [[ "$1" == "scan" || "$1" == "parse" || "$1" == "typecheck" ]]; then
     if [ "$EXIT_CODE" -eq 0 ]; then
         echo "OK"
     fi

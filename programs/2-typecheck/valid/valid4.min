@@ -1,0 +1,8 @@
+// Booleans
+var a : boolean = FALSE;
+var b : boolean = TRUE;
+var c : boolean = "TRUE";
+var d : boolean = "FALSE";
+var e : boolean = "T" + "R" + "U" + "E";
+var f : boolean = "Should generate runtime error";
+var g : boolean = "TRUE" * 2;

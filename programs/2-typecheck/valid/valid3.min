@@ -1,0 +1,10 @@
+// Floats
+var a : float = 1.2;
+var b : float = 1;
+var c : float = 1 + 1.2;
+var d : float = 1.2 + 1;
+var e : float = -1.2;
+var f : float = a;
+var g : float = 1 * 1.2;
+var h : float = 1 / 1.2;
+var i : float = 1 - 1.2;

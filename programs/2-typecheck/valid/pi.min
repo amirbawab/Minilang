@@ -1,0 +1,45 @@
+// Compute pi up to N iterations
+// Original file exists in ../../1-scan+parse/valid/pi.min
+
+// Number of iterations
+var iter : int = 0;
+
+// Square root of 12
+var sqrt12 : float = 3.46410161514;
+
+// Value of pi
+var pi : float = 0.0;
+
+// Temp variables
+var numerator : float = 0.0;
+var denominator : float = 0.0;
+var iterTmp : int = 0;
+
+// Read number of iterations from user
+read iter;
+
+while iter != 0 {
+    numerator = 1;
+
+    // Compute numerator
+    iterTmp = iter;
+    while iterTmp != 0 {
+        numerator = numerator * (-1/3);
+        iterTmp = iterTmp - 1;
+    }
+
+    // Compute denominator
+    denominator = 2 * iter + 1;
+
+    // Update pi value
+    pi = pi + numerator/denominator;
+    iter = iter - 1;
+}
+
+// Compute final value of pi
+pi = sqrt12 * pi;
+
+print "Value of pi after ";
+print iter;
+print " is: ";
+print pi;
