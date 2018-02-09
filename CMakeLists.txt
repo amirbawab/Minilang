@@ -24,6 +24,9 @@ elseif(NOT BISON_FOUND)
     message(FATAL_ERROR "Bison package was not found")
 endif()
 
+# Compile with C++11 option
+add_compile_options(-std=c++11)
+
 # Flex it!
 flex_target(miniflex ${PROJECT_SOURCE_DIR}/etc/flex/minilang.l
         ${CMAKE_CURRENT_BINARY_DIR}/cpp/src/flex/minilang_flex.cpp)
