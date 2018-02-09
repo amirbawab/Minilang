@@ -1,0 +1,3 @@
+// Wrong unary
+var a : string = "error";
+a = -a;

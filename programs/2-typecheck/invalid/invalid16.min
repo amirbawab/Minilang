@@ -1,0 +1,2 @@
+// Wrong assignment
+var a : float = "error";
