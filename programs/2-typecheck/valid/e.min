@@ -43,7 +43,7 @@ while iter != -1 {
     }
 
     // Update e
-    e = e + 1/fact;
+    e = e + 1.0/fact;
     iter = iter - 1;
 }
 

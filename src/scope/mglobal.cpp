@@ -40,13 +40,13 @@ void mini::MGlobal::typeCheck() {
 
 std::string mini::MGlobal::toC(int indent) {
     std::stringstream ss;
-    ss << "/***********************************" << std::endl
-       << " * THIS PROGRAM IS AUTO GENERATED" << std::endl
-       << " ***********************************/" << std::endl
-       << "#include <stdio.h>" << std::endl
-       << "#include <stdlib.h>" << std::endl
-       << "#include <stdbool.h>" << std::endl
-       << "#include <string.h>" << std::endl
+    ss << mini::utils::indent(indent) << "/***********************************" << std::endl
+       << mini::utils::indent(indent) << " * THIS PROGRAM IS AUTO GENERATED" << std::endl
+       << mini::utils::indent(indent) << " ***********************************/" << std::endl
+       << mini::utils::indent(indent) << "#include <stdio.h>" << std::endl
+       << mini::utils::indent(indent) << "#include <stdlib.h>" << std::endl
+       << mini::utils::indent(indent) << "#include <stdbool.h>" << std::endl
+       << mini::utils::indent(indent) << "#include <string.h>" << std::endl
        << std::endl;
 
     // Repeat String function
