@@ -33,6 +33,10 @@ void mini::MIf::typeCheck() {
             statement->typeCheck();
         }
     }
+
+    if(m_else) {
+        m_else->typeCheck();
+    }
 }
 
 std::string mini::MIf::toC(int indent) {
