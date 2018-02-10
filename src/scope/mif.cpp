@@ -41,7 +41,7 @@ void mini::MIf::typeCheck() {
 
 std::string mini::MIf::toC(int indent) {
     std::stringstream ss;
-    ss << mini::utils::indent(indent) << "if " << m_condition->toC() << " {";
+    ss << mini::utils::indent(indent) << "if ( " << m_condition->toC() << " ) {";
     if(m_statements) {
         ss << std::endl;
         for(mini::MStatement* statement : *m_statements) {
