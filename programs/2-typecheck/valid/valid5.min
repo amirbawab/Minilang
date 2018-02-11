@@ -1,0 +1,9 @@
+// If else
+var a : int = 1;
+var b : int = 2;
+
+if a || b {
+    a = b;
+} else {
+    b = a;
+}
